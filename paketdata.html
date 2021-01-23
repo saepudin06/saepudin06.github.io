@@ -110,7 +110,7 @@
     if(operator == null) window.location.href = "index.html";
     $('.lbl').text("Paket data " + operator);
 
-    $.get( "data/pulsa.json", function( obj ) {
+    $.get( "data/paketdata.json", function( obj ) {
       for (var opt in obj) {
         if(opt == operator){
           for(var list in obj[opt]){
