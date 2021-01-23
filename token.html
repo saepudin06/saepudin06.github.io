@@ -104,11 +104,10 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="data/token.js"></script>
   <script type="text/javascript">
     $('.lbl').text("Token Listrik prabayar ");
     
-    $.get( "data/pulsa.json", function( obj ) {
+    $.get( "data/token.json", function( obj ) {
       for (var opt in obj) {
         let harga = obj[opt]["harga"];
               let jual = obj[opt]["jual"] + obj[opt]["untung"];
