@@ -104,7 +104,6 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="data/pulsa.js"></script>
   <script type="text/javascript">
     const urlParams = new URLSearchParams(window.location.search);
     const operator = urlParams.get('opt')
@@ -113,8 +112,6 @@
     // console.log(daftarHarga);
     
     $.get( "data/pulsa.json", function( obj ) {
-      // var obj = JSON.parse(data);
-      // console.log(data);
       for (var opt in obj) {
         if(opt == operator){
           for(var list in obj[opt]){

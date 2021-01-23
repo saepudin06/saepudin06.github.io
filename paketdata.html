@@ -104,31 +104,30 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="data/paketdata.js"></script>
   <script type="text/javascript">
     const urlParams = new URLSearchParams(window.location.search);
     const operator = urlParams.get('opt')
     if(operator == null) window.location.href = "index.html";
     $('.lbl').text("Paket data " + operator);
-    console.log(daftarHarga);
-    var obj = JSON.parse(daftarHarga);
-    // console.log(obj);
-    for (var opt in obj) {
-      if(opt == operator){
-        for(var list in obj[opt]){
-            let nama = obj[opt][list]["nama"];
-            let desc = obj[opt][list]["desc"];
-            let jual = obj[opt][list]["jual"] + obj[opt][list]["untung"];
 
-            //format 
-            jual = jual.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-            $('.list-harga').append('<div class="row" style="padding: 5px;">'+
-                                   '<button class="btn btn-outline-danger btn-block col-lg-12" style="text-align: left !important;"><h5>'+nama+'</h5> '+desc+' <br> Harga : '+jual+'</button></div>');
-            
+    $.get( "data/pulsa.json", function( obj ) {
+      for (var opt in obj) {
+        if(opt == operator){
+          for(var list in obj[opt]){
+              let nama = obj[opt][list]["nama"];
+              let desc = obj[opt][list]["desc"];
+              let jual = obj[opt][list]["jual"] + obj[opt][list]["untung"];
+
+              //format 
+              jual = jual.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+              $('.list-harga').append('<div class="row" style="padding: 5px;">'+
+                                     '<button class="btn btn-outline-danger btn-block col-lg-12" style="text-align: left !important;"><h5>'+nama+'</h5> '+desc+' <br> Harga : '+jual+'</button></div>');
+              
+          }
+
         }
-
       }
-    }
+    });
     
     
   </script>
