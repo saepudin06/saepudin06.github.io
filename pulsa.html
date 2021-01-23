@@ -111,24 +111,28 @@
     if(operator == null) window.location.href = "index.html";
     $('.lbl').text("Pulsa " + operator);
     // console.log(daftarHarga);
-    var obj = JSON.parse(daftarHarga);
+    
+    $.get( "data/pulsa.json", function( data ) {
+      var obj = JSON.parse(data);
+      console.log(obj);
+    });
     // console.log(obj);
-    for (var opt in obj) {
-      if(opt == operator){
-        for(var list in obj[opt]){
-            let harga = obj[opt][list]["harga"];
-            let jual = obj[opt][list]["jual"] + obj[opt][list]["untung"];
+    // for (var opt in obj) {
+    //   if(opt == operator){
+    //     for(var list in obj[opt]){
+    //         let harga = obj[opt][list]["harga"];
+    //         let jual = obj[opt][list]["jual"] + obj[opt][list]["untung"];
 
-            //format 
-            harga = harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-            jual = jual.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-            $('.list-harga').append('<div class="row" style="padding: 5px;">'+
-                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important;"><h5>'+harga+'</h5> Harga : '+jual+'</button></div>');
+    //         //format 
+    //         harga = harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+    //         jual = jual.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+    //         $('.list-harga').append('<div class="row" style="padding: 5px;">'+
+    //                                '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important;"><h5>'+harga+'</h5> Harga : '+jual+'</button></div>');
             
-        }
+    //     }
 
-      }
-    }
+    //   }
+    // }
     
     
   </script>
