@@ -110,7 +110,7 @@
     const operator = urlParams.get('opt')
     if(operator == null) window.location.href = "index.html";
     $('.lbl').text("Pulsa " + operator);
-    console.log(daftarHarga);
+    // console.log(daftarHarga);
     var obj = JSON.parse(daftarHarga);
     // console.log(obj);
     for (var opt in obj) {
