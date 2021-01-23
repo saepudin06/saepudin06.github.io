@@ -110,7 +110,7 @@
     const operator = urlParams.get('opt')
     if(operator == null) window.location.href = "index.html";
     $('.lbl').text("Paket data " + operator);
-
+    console.log(daftarHarga);
     var obj = JSON.parse(daftarHarga);
     // console.log(obj);
     for (var opt in obj) {
