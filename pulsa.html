@@ -58,46 +58,7 @@
   <footer class="footer bg-light fixed-bottom" style="padding-top: 0px !important;padding-bottom: 0px !important;">
     <div class="container">
       <div class="row">
-        <button class="btn btn-lg btn-success btn-block col-lg-12">Beli Sekarang</button>
-        <!-- <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-          <ul class="list-inline mb-2">
-            <li class="list-inline-item">
-              <a href="javascript:;">About</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="javascript:;">Contact</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="javascript:;">Terms of Use</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="javascript:;">Privacy Policy</a>
-            </li>
-          </ul>
-          <p class="text-muted small mb-4 mb-lg-0">&copy; Asep Saepudin 2021. All Rights Reserved.</p>
-        </div>
-        <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item mr-3">
-              <a href="javascript:;">
-                <i class="fab fa-facebook fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item mr-3">
-              <a href="javascript:;">
-                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="javascript:;">
-                <i class="fab fa-instagram fa-2x fa-fw"></i>
-              </a>
-            </li>
-          </ul>
-        </div> -->
+        <button id="send-msg" class="btn btn-lg btn-success btn-block col-lg-12" disabled>Beli Sekarang</button>
       </div>
     </div>
   </footer>
@@ -139,7 +100,7 @@
             if (value) {
                 if(value.operator == operator && value.jenis == 'pulsa'){
                   $('.list-harga').append('<div class="row" style="padding: 5px;">'+
-                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;"><h6>'+value.keterangan+'</h6> Harga : '+value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</button></div>');
+                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send()"><h6>'+value.keterangan+'</h6> Harga : '+value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</button></div>');
               }
             }
             lastIndex = index;
@@ -147,7 +108,9 @@
         
     });   
     
-    
+    function send(){
+      $( "#send-msg" ).prop( "disabled", false );
+    }
   </script>
 
 </body>
