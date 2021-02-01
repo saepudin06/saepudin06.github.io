@@ -137,7 +137,7 @@
             if (value) {
                 if(value.operator == operator && value.jenis == 'paketdata'){
                   $('.list-harga').append('<div class="row" style="padding: 5px;">'+
-                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;"><h6>'+value.keterangan+'</h6> Harga : '+value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</button></div>');
+                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;">'+value.keterangan+'<br>Harga : '+value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</button></div>');
               }
             }
             lastIndex = index;
@@ -145,8 +145,8 @@
         
     }); 
 
-    // $('.list-harga').append('<div class="row" style="padding: 5px;">'+
-    //                                  '<button class="btn btn-outline-danger btn-block col-lg-12" style="text-align: left !important; font-size: 12px;"><h6>'+nama+'</h6> '+desc+' <br> Harga : '+jual+'</button></div>');
+    $('.list-harga').append('<div class="row" style="padding: 5px;">'+
+                                     '<button class="btn btn-outline-danger btn-block col-lg-12" style="text-align: left !important; font-size: 12px;"><h6>'+nama+'</h6> '+desc+' <br> Harga : '+jual+'</button></div>');
     
     
   </script>
