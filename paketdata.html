@@ -85,8 +85,8 @@
                   <div class="modal-footer">
                       <button type="button" class="btn btn-light" data-dismiss="modal">Batal
                       </button>
-                      <a href="intent://send?text=Hello#Intent;scheme=whatsapp;package=com.whatsapp;end" class="btn btn-success kirim">Kirim
-                      </a>
+                      <button type="button" class="btn btn-success kirim">Kirim
+                      </button>
                   </div>
               </div>
           </div>
@@ -161,6 +161,23 @@
       $( "#update-modal" ).modal('show');
     });
     
+    function kirim(){
+      var ket = $( "#ket" ).val(ket);
+      var harga = $( "#harga" ).val(harga);
+      var hp = $( "#hp" ).val(hp);
+      var pesan = ket+' harga '+harga+' kirim ke '+hp;
+      var nomor = '085888586857';
+
+      var win = window.open('https://api.whatsapp.com/send?phone='+nomor+'&text='+pesan);
+      if (win) {
+          //Browser has allowed it to be opened
+          win.focus();
+      } else {
+          //Browser has blocked it
+          alert('Please allow popups for this website');
+      }
+      return false;
+    }
   </script>
 
 </body>
