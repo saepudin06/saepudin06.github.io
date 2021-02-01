@@ -146,9 +146,11 @@
       $( "#send-msg" ).prop( "disabled", false );
       $( "#ket" ).val(ket);
       $( "#harga" ).val(harga);
-      $( "#send-msg" ).modal('show');
     }
-    
+
+    $( "#send-msg" ).on('click', function(){
+      $( "#send-msg" ).modal('show');
+    });
     
   </script>
 
