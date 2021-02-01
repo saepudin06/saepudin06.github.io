@@ -163,7 +163,7 @@
       var ket = $( "#ket" ).val();
       var harga = $( "#harga" ).val();
       var hp = $( "#hp" ).val();
-      var pesan = ket+' harga '+harga+' kirim ke '+hp;
+      var pesan = ket+' \nharga '+harga+' \nkirim ke '+hp;
       var nomor = '085888586857';
 
       var win = window.open('https://api.whatsapp.com/send?phone='+nomor+'&text='+pesan);
