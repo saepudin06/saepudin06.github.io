@@ -104,30 +104,49 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
   <script type="text/javascript">
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyCPSiurIE5DmdIuV2M2VX0IiLidUv5JGi8",
+        authDomain: "salman-pulsa.firebaseapp.com",
+        projectId: "salman-pulsa",
+        storageBucket: "salman-pulsa.appspot.com",
+        messagingSenderId: "931681268010",
+        appId: "1:931681268010:web:e2798e9ba135ed56e42e53"
+    };
+      // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    var database = firebase.database();
+
+    var lastIndex = 0;
+
     const urlParams = new URLSearchParams(window.location.search);
     const operator = urlParams.get('opt')
     if(operator == null) window.location.href = "index.html";
     $('.lbl').text("Paket data " + operator);
 
-    $.get( "data/paketdata.json", function( obj ) {
-      for (var opt in obj) {
-        if(opt == operator){
-          for(var list in obj[opt]){
-              let nama = obj[opt][list]["nama"];
-              let desc = obj[opt][list]["desc"];
-              let jual = obj[opt][list]["jual"] + obj[opt][list]["untung"];
+    // Get Data
+    firebase.database().ref('listharga').on('value', function (snapshot) {
+        var value = snapshot.val();
 
-              //format 
-              jual = jual.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-              $('.list-harga').append('<div class="row" style="padding: 5px;">'+
-                                     '<button class="btn btn-outline-danger btn-block col-lg-12" style="text-align: left !important; font-size: 12px;"><h6>'+nama+'</h6> '+desc+' <br> Harga : '+jual+'</button></div>');
-              
-          }
+        $.each(value, function (index, value) {
+            if (value) {
+                if(value.operator == operator && value.jenis == 'paketdata'){
+                  $('.list-harga').append('<div class="row" style="padding: 5px;">'+
+                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;"><h6>'+value.keterangan+'</h6> Harga : '+value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</button></div>');
+              }
+            }
+            lastIndex = index;
+        });
+        
+    }); 
 
-        }
-      }
-    });
+    // $('.list-harga').append('<div class="row" style="padding: 5px;">'+
+    //                                  '<button class="btn btn-outline-danger btn-block col-lg-12" style="text-align: left !important; font-size: 12px;"><h6>'+nama+'</h6> '+desc+' <br> Harga : '+jual+'</button></div>');
     
     
   </script>

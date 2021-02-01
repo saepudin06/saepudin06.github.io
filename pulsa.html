@@ -131,20 +131,20 @@
     $('.lbl').text("Pulsa " + operator);
     
     // Get Data
-      firebase.database().ref('listharga').on('value', function (snapshot) {
-          var value = snapshot.val();
+    firebase.database().ref('listharga').on('value', function (snapshot) {
+        var value = snapshot.val();
 
-          $.each(value, function (index, value) {
-              if (value) {
-                  if(value.operator == operator && value.jenis == 'pulsa'){
-                    $('.list-harga').append('<div class="row" style="padding: 5px;">'+
-                                     '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;"><h6>'+value.keterangan+'</h6> Harga : '+value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</button></div>');
-                }
+        $.each(value, function (index, value) {
+            if (value) {
+                if(value.operator == operator && value.jenis == 'pulsa'){
+                  $('.list-harga').append('<div class="row" style="padding: 5px;">'+
+                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;"><h6>'+value.keterangan+'</h6> Harga : '+value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</button></div>');
               }
-              lastIndex = index;
-          });
-          
-      });   
+            }
+            lastIndex = index;
+        });
+        
+    });   
     
     
   </script>
