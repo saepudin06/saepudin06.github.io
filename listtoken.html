@@ -70,7 +70,7 @@
 	        $.each(value, function (index, value) {
 	            if (value) {
 	                if(value.operator == 'pln' && value.jenis == 'token'){
-		                htmlTelkomsel.push('<tr>\
+		                htmlToken.push('<tr>\
 		                <td>' + value.keterangan + '</td>\
 		                <td>' + value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</td>\
 		            	</tr>');
