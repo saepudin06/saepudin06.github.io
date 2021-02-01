@@ -58,12 +58,44 @@
   <footer class="footer bg-light fixed-bottom" style="padding-top: 0px !important;padding-bottom: 0px !important;">
     <div class="container">
       <div class="row">
-        <input type="text" class="form-control col-lg-12" name="no-hp" id="no-hp">
-        <button id="send-msg" class="btn btn-lg btn-success btn-block col-lg-12" disabled>Beli Sekarang</button>
+        <button data-target="#update-modal" class="btn btn-lg btn-success btn-block col-lg-12" disabled>Beli Sekarang</button>
       </div>
     </div>
   </footer>
 
+  <!-- Update Model -->
+  <form action="" method="POST" class="users-update-record-model form-horizontal">
+      <div id="update-modal" data-backdrop="static" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel"
+           aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content" style="overflow: hidden;">
+                  <div class="modal-header">
+                      <h4 class="modal-title" id="custom-width-modalLabel">Masukan No.</h4>
+                      <button type="button" class="close" data-dismiss="modal"
+                              aria-hidden="true">×
+                      </button>
+                  </div>
+                  
+                  <div class="form-group col-md-12">
+                      <input id="hp" type="text" class="form-control" name="hp" placeholder="Nomor Handphone" required autofocus>
+                  </div>
+                  <div class="form-group col-md-12">
+                      <input id="ket" type="text" class="form-control" name="ket" placeholder="Nama" required autofocus>
+                  </div>
+                  <div class="form-group col-md-12">
+                      <input id="harga" type="text" class="form-control" name="harga" placeholder="Harga" autofocus>
+                  </div>
+
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-light" data-dismiss="modal">Close
+                      </button>
+                      <button type="button" class="btn btn-success updateHarga">Update
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </form>
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -101,7 +133,7 @@
             if (value) {
                 if(value.operator == operator && value.jenis == 'pulsa'){
                   $('.list-harga').append('<div class="row" style="padding: 5px;">'+
-                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+value.keterangan+'\')"><h6>'+value.keterangan+'</h6> Harga : '+value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</button></div>');
+                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+value.keterangan+'\',\''+value.harga+'\')"><h6>'+value.keterangan+'</h6> Harga : '+value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</button></div>');
               }
             }
             lastIndex = index;
@@ -109,9 +141,10 @@
         
     });   
     
-    function send(ket){
+    function send(ket, harga){
       $( "#send-msg" ).prop( "disabled", false );
-      // alert(ket);
+      $( "#ket" ).val(ket);
+      $( "#harga" ).val(harga);
     }
   </script>
 
