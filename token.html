@@ -26,7 +26,7 @@
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-primary bg-primary static-top">
+  <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container">
       <div class="navbar-brand text-white"><a href="index.html"><i class="fa fa-arrow-left text-white"></i></a>&nbsp;&nbsp;SALMAN SHOP</div>
       <!-- <a class="btn btn-outline-primary" href="javascript:;">Sign In</a> -->
@@ -34,14 +34,14 @@
   </nav>
 
   <!-- Masthead -->
-  <header class="bg-light">
-  	<div class="container bg-warning">
-  		<div class="row">
-  			<div class="col-xl-12 text-center text-white mx-auto" style="padding: 10px;">
-		  		<h5><div class="lbl"></div></h5>
-		  	</div>
-		</div>
-	</div>
+  <header class="bg-light" style="padding-top:55px">
+    <div class="container bg-warning">
+      <div class="row">
+        <div class="col-xl-12 text-center text-white mx-auto" style="padding: 10px;">
+          <h5><div class="lbl"></div></h5>
+        </div>
+    </div>
+  </div>
   </header>
 
   <!-- Icons Grid -->
@@ -54,73 +54,136 @@
     </div>
   </section>
 
+  <!-- Update Model -->
+  <form action="" method="POST" class="users-update-record-model form-horizontal">
+      <div id="update-modal" data-backdrop="static" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel"
+           aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content" style="overflow: hidden;">
+                  <div class="modal-header">
+                      <h4 class="modal-title" id="custom-width-modalLabel">Masukan No.</h4>
+                      <button type="button" class="close" data-dismiss="modal"
+                              aria-hidden="true">×
+                      </button>
+                  </div>
+
+                  <div class="form-group col-md-12" style="padding-top: 20px;">
+                    <label id="ket-lbl"></label><br>
+                    <label id="harga-lbl"></label>
+                  </div>
+                  
+                  <div class="form-group col-md-12">
+                      <input id="nomor_pel" type="text" class="form-control" name="nomor_pel" placeholder="Nomor Pelanggan" required autofocus>
+                  </div>
+                  <div class="form-group col-md-12">
+                      <input id="ket" type="hidden" class="form-control" name="ket" placeholder="Nama" required autofocus>
+                  </div>
+                  <div class="form-group col-md-12">
+                      <input id="harga" type="hidden" class="form-control" name="harga" placeholder="Harga" autofocus>
+                  </div>
+
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-light" data-dismiss="modal">Batal
+                      </button>
+                      <button type="button" class="btn btn-success" onclick="kirim()">Kirim
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </form>
+
   <!-- Footer -->
-  <footer class="footer bg-light">
+<footer class="footer bg-light fixed-bottom" style="padding-top: 0px !important;padding-bottom: 0px !important;">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-          <ul class="list-inline mb-2">
-            <li class="list-inline-item">
-              <a href="javascript:;">About</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="javascript:;">Contact</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="javascript:;">Terms of Use</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="javascript:;">Privacy Policy</a>
-            </li>
-          </ul>
-          <p class="text-muted small mb-4 mb-lg-0">&copy; Asep Saepudin 2021. All Rights Reserved.</p>
-        </div>
-        <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item mr-3">
-              <a href="javascript:;">
-                <i class="fab fa-facebook fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item mr-3">
-              <a href="javascript:;">
-                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="javascript:;">
-                <i class="fab fa-instagram fa-2x fa-fw"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
+        <input type="text" class="form-control col-lg-12" name="no-hp" id="no-hp">
+        <button id="send-msg" class="btn btn-lg btn-success btn-block col-lg-12" disabled>Pilih</button>
       </div>
     </div>
   </footer>
 
+  
+
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
   <script type="text/javascript">
-    $('.lbl').text("Token Listrik prabayar ");
-    
-    $.get( "data/token.json", function( obj ) {
-      for (var opt in obj) {
-        let harga = obj[opt]["harga"];
-              let jual = obj[opt]["jual"] + obj[opt]["untung"];
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyCPSiurIE5DmdIuV2M2VX0IiLidUv5JGi8",
+        authDomain: "salman-pulsa.firebaseapp.com",
+        projectId: "salman-pulsa",
+        storageBucket: "salman-pulsa.appspot.com",
+        messagingSenderId: "931681268010",
+        appId: "1:931681268010:web:e2798e9ba135ed56e42e53"
+    };
+      // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
 
-              //format 
-              harga = harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-              jual = jual.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-              $('.list-harga').append('<div class="row" style="padding: 5px;">'+
-                                     '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;"><h6>'+harga+'</h6> Harga : '+jual+'</button></div>');
-      }
+    var database = firebase.database();
+
+    var lastIndex = 0;
+
+    $('.lbl').text("Token Listrik");
+
+    // Get Data
+    firebase.database().ref('listharga').on('value', function (snapshot) {
+        var value = snapshot.val();
+
+        $.each(value, function (index, value) {
+            if (value) {
+                if(value.operator == 'pln' && value.jenis == 'token'){
+                  $('.list-harga').append('<div class="row" style="padding: 5px;">'+
+                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+value.keterangan+'\',\''+value.harga+'\')"><h6>'+value.keterangan+'</h6> Harga : '+value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</button></div>');
+              }
+            }
+            lastIndex = index;
+        });
+        
+    }); 
+
+    function send(ket, harga){
+      $( "#send-msg" ).prop( "disabled", false );
+      $( "#ket" ).val(ket);
+      $( "#harga" ).val(harga);
+      $( "#ket-lbl" ).text(ket);
+      $( "#harga-lbl" ).text('Harga : ' + harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
+    }
+
+    $( "#send-msg" ).on('click', function(){
+      $( "#update-modal" ).modal('show');
     });
     
-    
+    function kirim(){
+      var date = new Date();
+      var dateStr =
+        ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
+        ("00" + date.getDate()).slice(-2) + "/" +
+        date.getFullYear() + " " +
+        ("00" + date.getHours()).slice(-2) + ":" +
+        ("00" + date.getMinutes()).slice(-2) + ":" +
+        ("00" + date.getSeconds()).slice(-2);
+
+      var ket = $( "#ket" ).val();
+      var harga = $( "#harga" ).val();
+      var nomor_pel = $( "#nomor_pel" ).val();
+      var pesan = 'Tanggal : '+dateStr+'\nPesanan :'+ket+'\nHarga : '+harga+'\nNomor Pelanggan : '+nomor_pel;
+      var nomor = '+6285888586857';
+
+      var win = window.open('https://api.whatsapp.com/send?phone='+nomor+'&text='+window.encodeURIComponent(pesan));
+      if (win) {
+          //Browser has allowed it to be opened
+          win.focus();
+      } else {
+          //Browser has blocked it
+          alert('Please allow popups for this website');
+      }
+      return false;
+    }
   </script>
 
 </body>
