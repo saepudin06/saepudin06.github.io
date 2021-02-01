@@ -59,7 +59,7 @@
     <div class="container">
       <div class="row">
         <input type="text" class="form-control col-lg-12" name="no-hp" id="no-hp">
-        <button data-target="#update-modal" class="btn btn-lg btn-success btn-block col-lg-12" disabled>Beli Sekarang</button>
+        <button id="send-msg" class="btn btn-lg btn-success btn-block col-lg-12" disabled>Beli Sekarang</button>
       </div>
     </div>
   </footer>
@@ -146,6 +146,7 @@
       $( "#send-msg" ).prop( "disabled", false );
       $( "#ket" ).val(ket);
       $( "#harga" ).val(harga);
+      $( "#send-msg" ).modal('show');
     }
     
     
