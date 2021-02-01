@@ -53,11 +53,14 @@
                 <div class="form-group col-md-3" style="padding-top: 5px">
                     <input id="jual" type="text" class="form-control form-control-sm col-md-12" name="jual" placeholder="Jual" required autofocus>
                 </div>
-                <div class="form-group col-md-3" style="padding-top: 5px">
+                <div class="form-group col-md-2" style="padding-top: 5px">
                     <button id="submitHarga" type="button" class="btn btn-sm btn-primary col-md-12">Tambah</button>
                 </div>
-                <div class="form-group col-md-3" style="padding-top: 5px">
-                    <button id="saveToPdfHarga" type="button" class="btn btn-sm btn-danger col-md-12">Save to PDF</button>
+                <div class="form-group col-md-2" style="padding-top: 5px">
+                    <button onclick="goToPage('listpulsa.html')" type="button" class="btn btn-sm btn-danger col-md-12">Pulsa</button>
+                </div>
+                <div class="form-group col-md-2" style="padding-top: 5px">
+                    <button onclick="goToPage('listpaketdata.html')" type="button" class="btn btn-sm btn-danger col-md-12">Paket Data</button>
                 </div>
            
             </form>
@@ -163,7 +166,6 @@
  
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/@grabzit/js@3.4.8/grabzit.min.js"></script>
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
@@ -290,17 +292,9 @@
         $('body').find('.users-remove-record-model').find("input").remove();
     });
 
-    $('#saveToPdfHarga').on('click', function(){
-        // $.ajax({
-        //     url : 'savepdf.html',
-        //     type : 'GET',
-        //     success: function(data) {       
-                    
-                
-        //     }
-        // });
-        GrabzIt("N2FiMDEzYWU5M2RhNGZmMzllMDE4NzNiNWM0ZGUwZTk=").ConvertURL("https://saepudin06.github.io/savepdf.html").Create(); 
-    });
+    function goToPage(page){
+        window.location.href = page;
+    }
 </script>
  
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
