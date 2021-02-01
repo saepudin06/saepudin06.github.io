@@ -68,13 +68,21 @@
                   </div>
                   
                   <div class="form-group col-md-12">
+                    <label id="ket-lbl"></label>
+                  </div>  
+
+                  <div class="form-group col-md-12">
+                    <label id="harga-lbl"></label>
+                  </div>  
+
+                  <div class="form-group col-md-12">
                       <input id="hp" type="text" class="form-control" name="hp" placeholder="Nomor Handphone" required autofocus>
                   </div>
                   <div class="form-group col-md-12">
-                      <input id="ket" type="text" class="form-control" name="ket" placeholder="Nama" required autofocus>
+                      <input id="ket" type="hidden" class="form-control" name="ket" placeholder="Nama" required autofocus>
                   </div>
                   <div class="form-group col-md-12">
-                      <input id="harga" type="text" class="form-control" name="harga" placeholder="Harga" autofocus>
+                      <input id="harga" type="hidden" class="form-control" name="harga" placeholder="Harga" autofocus>
                   </div>
 
                   <div class="modal-footer">
@@ -146,6 +154,8 @@
       $( "#send-msg" ).prop( "disabled", false );
       $( "#ket" ).val(ket);
       $( "#harga" ).val(harga);
+      $( "#ket-lbl" ).text(ket);
+      $( "#harga-lbl" ).text(harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
     }
 
     $( "#send-msg" ).on('click', function(){
