@@ -67,13 +67,10 @@
                       </button>
                   </div>
                   
-                  <div class="form-group col-md-12">
-                    <label id="ket-lbl"></label>
-                  </div>  
-
-                  <div class="form-group col-md-12">
-                    <label id="harga-lbl"></label>
-                  </div>  
+                  <div class="form-group col-md-12" style="padding-top: 20px;">
+                    <h6><label id="ket-lbl"></label></h6>
+                    <h6><label id="harga-lbl"></label></h6>
+                  </div>   
 
                   <div class="form-group col-md-12">
                       <input id="hp" type="text" class="form-control" name="hp" placeholder="Nomor Handphone" required autofocus>
@@ -86,7 +83,7 @@
                   </div>
 
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-light" data-dismiss="modal">Close
+                      <button type="button" class="btn btn-light" data-dismiss="modal">Cancel
                       </button>
                       <button type="button" class="btn btn-success updateHarga">Update
                       </button>
@@ -155,7 +152,7 @@
       $( "#ket" ).val(ket);
       $( "#harga" ).val(harga);
       $( "#ket-lbl" ).text(ket);
-      $( "#harga-lbl" ).text(harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
+      $( "#harga-lbl" ).text('Harga : ' + harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
     }
 
     $( "#send-msg" ).on('click', function(){
