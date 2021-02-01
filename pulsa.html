@@ -166,7 +166,7 @@
       var pesan = ket+' \nharga '+harga+' \nkirim ke '+hp;
       var nomor = '+6285888586857';
 
-      var win = window.open('https://api.whatsapp.com/send?phone='+nomor+'&text='+pesan);
+      var win = window.open('https://api.whatsapp.com/send?phone='+nomor+'&text='+window.encodeURIComponent(pesan));
       if (win) {
           //Browser has allowed it to be opened
           win.focus();
