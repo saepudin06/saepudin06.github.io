@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <title>SALMAN SHOP</title>
+    <style type="text/css">
+        .center {
+            text-align: center !important;
+        }
+    </style>
+ 
+</head>
+<body>
+ 
+<div class="container" style="margin-top: 50px; font-size: 12px !important;">
+ 
+    <h4 class="text-center">Transaksi</h4><br>
+ 
+    <!-- <h5># Tambah Harga</h5> -->
+    <div class="card card-default">
+        <div class="card-body">
+            <form id="addList" class="form-inline" method="POST" action="">
+                <div class="form-group col-md-3">
+                    <select class="form-control form-control-sm col-md-12" id="operator" required autofocus >
+					    <option value="telkomsel">Telkomsel</option>
+					    <option value="indosat">Indosat</option>
+					    <option value="xl">XL</option>
+					    <option value="three">Three</option>
+					    <option value="axis">Axis</option>
+					    <option value="smartfren">Smartfren</option>
+					    <option value="pln">PLN</option>
+					 </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <select class="form-control form-control-sm col-md-12" id="jenis" required autofocus>
+					    <option value="pulsa">Pulsa</option>
+					    <option value="paketdata">Paket Data</option>
+					    <option value="token">Token Listrik</option>
+					 </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <input id="keterangan" type="text" class="form-control form-control-sm col-md-12" name="keterangan" placeholder="Keterangan" autofocus>
+                </div>
+                <div class="form-group col-md-3" style="padding-top: 5px">
+                    <input id="harga" type="text" class="form-control form-control-sm col-md-12" name="harga" placeholder="Harga" required autofocus>
+                </div>
+                <div class="form-group col-md-3" style="padding-top: 5px">
+                    <input id="jual" type="text" class="form-control form-control-sm col-md-12" name="jual" placeholder="Jual" required autofocus>
+                </div>
+                <div class="form-group col-md-2" style="padding-top: 5px">
+                    <button id="submitHarga" type="button" class="btn btn-sm btn-primary col-md-12">Tambah</button>
+                </div>
+                <div class="form-group col-md-2" style="padding-top: 5px">
+                    <button onclick="goToPage('listpulsa.html')" type="button" class="btn btn-sm btn-danger col-md-12">Pulsa</button>
+                </div>
+                <div class="form-group col-md-2" style="padding-top: 5px">
+                    <button onclick="goToPage('listpaketdata.html')" type="button" class="btn btn-sm btn-danger col-md-12">Paket Data</button>
+                </div>
+           
+            </form>
+        </div>
+    </div>
+ 
+    <br>
+ 
+    <!-- <h5># Data Harga</h5> -->
+    <div class="table-responsive">
+	    <table class="table table-bordered table-sm center">
+	        <tr>
+	            <th width="130">Operator</th>
+	            <th width="130">Jenis</th>
+                <th>Keterangan</th>
+	            <th width="130">Harga</th>
+	            <th width="130">Jual</th>	            
+	            <th width="130">Action</th>
+	        </tr>
+	        <tbody id="tbody">
+	 
+	        </tbody>
+	    </table>
+	</div>
+</div>
+ 
+<!-- Update Model -->
+<form action="" method="POST" class="users-update-record-model form-horizontal">
+    <div id="update-modal" data-backdrop="static" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content" style="overflow: hidden;">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="custom-width-modalLabel">Update</h4>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                </div>
+                
+                <div class="form-group col-md-12">
+                    <select class="form-control form-control-sm" id="upd-operator" required autofocus >
+					    <option value="telkomsel">Telkomsel</option>
+					    <option value="indosat">Indosat</option>
+					    <option value="xl">XL</option>
+					    <option value="three">Three</option>
+					    <option value="axis">Axis</option>
+					    <option value="smartfren">Smartfren</option>
+					    <option value="pln">PLN</option>
+					 </select>
+                </div>
+                <div class="form-group col-md-12">
+                    <select class="form-control form-control-sm" id="upd-jenis" required autofocus>
+					    <option value="pulsa">Pulsa</option>
+					    <option value="paketdata">Paket Data</option>
+					    <option value="token">Token Listrik</option>
+					 </select>
+                </div>
+                <div class="form-group col-md-12">
+                    <input id="upd-harga" type="text" class="form-control form-control-sm" name="harga" placeholder="Harga" required autofocus>
+                </div>
+                <div class="form-group col-md-12">
+                    <input id="upd-jual" type="text" class="form-control form-control-sm" name="jual" placeholder="Jual" required autofocus>
+                </div>
+                <div class="form-group col-md-12">
+                    <input id="upd-keterangan" type="text" class="form-control form-control-sm" name="keterangan" placeholder="Keterangan" autofocus>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close
+                    </button>
+                    <button type="button" class="btn btn-success updateHarga">Update
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+ 
+<!-- Delete Model -->
+<form action="" method="POST" class="users-remove-record-model">
+    <div id="remove-modal" data-backdrop="static" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-dialog-centered" style="width:55%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="custom-width-modalLabel">Delete</h4>
+                    <button type="button" class="close remove-data-from-delete-form" data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin menghapus data ini?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect remove-data-from-delete-form" data-dismiss="modal">Close
+                    </button>
+                    <button type="button" class="btn btn-danger waves-effect waves-light deleteHarga">Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+ 
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
+<script>
+    // Your web app's Firebase configuration
+	var firebaseConfig = {
+	    apiKey: "AIzaSyCPSiurIE5DmdIuV2M2VX0IiLidUv5JGi8",
+	    authDomain: "salman-pulsa.firebaseapp.com",
+	    projectId: "salman-pulsa",
+	    storageBucket: "salman-pulsa.appspot.com",
+	    messagingSenderId: "931681268010",
+	    appId: "1:931681268010:web:e2798e9ba135ed56e42e53"
+	};
+    // Initialize Firebase
+  	firebase.initializeApp(firebaseConfig);
+
+    var database = firebase.database();
+ 
+    var lastIndex = 0;
+ 
+    // Get Data
+    firebase.database().ref('listharga').on('value', function (snapshot) {
+        var value = snapshot.val();
+        var htmls = [];
+        $.each(value, function (index, value) {
+            if (value) {
+                htmls.push('<tr>\
+                <td>' + value.operator + '</td>\
+                <td>' + value.jenis + '</td>\
+                <td>' + value.keterangan + '</td>\
+                <td>' + value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</td>\
+                <td>' + value.jual.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</td>\
+                <td><button data-toggle="modal" data-target="#update-modal" class="btn btn-sm btn-info updateHarga" data-id="' + index + '"><i class="fas fa-sm fa-pencil-alt"></i></button>\
+                <button data-toggle="modal" data-target="#remove-modal" class="btn btn-sm btn-danger removeHarga" data-id="' + index + '"><i class="fas fa-sm fa-trash-alt"></i></button></td>\
+            </tr>');
+            }
+            lastIndex = index;
+        });
+        $('#tbody').html(htmls);
+        $("#submitHarga").removeClass('disabled');
+    });
+ 
+    // Add Data
+    $('#submitHarga').on('click', function () {
+        
+        var operator = $('#operator').val();
+        var jenis = $('#jenis').val();
+        var harga = $('#harga').val();
+        var jual = $('#jual').val();
+        var keterangan = $('#keterangan').val();
+        var ID = lastIndex + 1;
+ 
+        firebase.database().ref('listharga/' + ID).set({
+            operator: operator,
+            jenis: jenis,
+            harga: harga,
+            jual: jual,
+            keterangan: keterangan
+        });
+ 
+        // Reassign lastID value
+        lastIndex = ID;
+        // $("#addList input").val("");
+        // menampilkan alert
+        alert("Berhasil menambah data");
+    });
+ 
+    // Update Data
+    var updateID = 0;
+    $('body').on('click', '.updateHarga', function () {
+        updateID = $(this).attr('data-id');
+        firebase.database().ref('listharga/' + updateID).on('value', function (snapshot) {
+            var values = snapshot.val();
+            if(values != null){
+	            $('#upd-operator').val(values.operator);
+		        $('#upd-jenis').val(values.jenis);
+		        $('#upd-harga').val(values.harga);
+		        $('#upd-jual').val(values.jual);
+		        $('#upd-keterangan').val(values.keterangan);
+		    }
+        });
+    });
+ 
+    $('.updateHarga').on('click', function () {
+        var operator = $('#upd-operator').val();
+        var jenis = $('#upd-jenis').val();
+        var harga = $('#upd-harga').val();
+        var jual = $('#upd-jual').val();
+        var keterangan = $('#upd-keterangan').val();
+
+        var postData = {
+            operator: operator,
+            jenis: jenis,
+            harga: harga,
+            jual: jual,
+            keterangan: keterangan
+        };
+        var updates = {};
+        updates['/listharga/' + updateID] = postData;
+        firebase.database().ref().update(updates);
+        // menyembunyikan modal 
+        $("#update-modal").modal('hide');
+        // menampilkan alert
+        alert("Berhasil mengubah data");
+    });
+ 
+    // Remove Data
+    $("body").on('click', '.removeHarga', function () {
+        var id = $(this).attr('data-id');
+        $('body').find('.users-remove-record-model').append('<input name="id" type="hidden" value="' + id + '">');
+    });
+ 
+    $('.deleteHarga').on('click', function () {
+        var values = $(".users-remove-record-model").serializeArray();
+        var id = values[0].value;
+        firebase.database().ref('listharga/' + id).remove();
+        $('body').find('.users-remove-record-model').find("input").remove();
+        // menyembunyikan modal
+        $("#remove-modal").modal('hide');
+        // menampilkan alert
+        alert("Berhasil menghapus data");
+    });
+    $('.remove-data-from-delete-form').click(function () {
+        $('body').find('.users-remove-record-model').find("input").remove();
+    });
+
+    function goToPage(page){
+        window.location.href = page;
+    }
+</script>
+ 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+ 
+</body>
+</html>
