@@ -108,6 +108,7 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
@@ -159,6 +160,10 @@
     });
     
     function kirim(){
+      var ket = $( "#ket" ).val();
+      var harga = $( "#harga" ).val();
+      var nomor_pel = $( "#nomor_pel" ).val();
+
       var date = new Date();
       var dateStr =
         ("00" + date.getDate()).slice(-2) + "/" +
@@ -168,20 +173,46 @@
         ("00" + date.getMinutes()).slice(-2) + ":" +
         ("00" + date.getSeconds()).slice(-2);
 
-      var ket = $( "#ket" ).val();
-      var harga = $( "#harga" ).val();
-      var nomor_pel = $( "#nomor_pel" ).val();
-      var pesan = 'Tanggal : '+dateStr+'\nPesanan :'+ket+'\nHarga : '+harga+'\nNomor Pelanggan : '+nomor_pel;
-      var nomor = '+6285624124368';
+      var ID =
+        ("00" + date.getDate()).slice(-2) + 
+        ("00" + (date.getMonth() + 1)).slice(-2) + 
+        date.getFullYear() + 
+        ("00" + date.getHours()).slice(-2) + 
+        ("00" + date.getMinutes()).slice(-2) + 
+        ("00" + date.getSeconds()).slice(-2); 
 
-      var win = window.open('https://api.whatsapp.com/send?phone='+nomor+'&text='+window.encodeURIComponent(pesan));
-      if (win) {
-          //Browser has allowed it to be opened
-          win.focus();
-      } else {
-          //Browser has blocked it
-          alert('Please allow popups for this website');
-      }
+      var invNo = "INV-" +ID + "." + nomor_pel;
+      
+      var pesan = "Tanggal : "+dateStr+"\nPesanan :"+ket+"\nJenis Pesanan : token \nHarga : "+harga+"\nNomor Pelanggan : "+nomor_pel+"\nNo. invoice : "+invNo;
+
+      $.ajax({
+          url: 'https://api.telegram.org/bot1616490013:AAGYHtu0NjIcjNmIiCZY-qe21o50hZ5pM9M/sendMessage',
+          type: 'POST',
+          data: { chat_id: "-527747385", text : pesan} ,
+          dataType: "json",
+          success: function (response) {
+              if(response.ok){
+
+                firebase.database().ref('transaksi/' + ID).set({
+                    tanggal: dateStr,
+                    nomor: invNo,
+                    nama: ket,
+                    jenis: "token",
+                    harga: harga,
+                    status: "inproses"                    
+                });
+                
+                swal("Transaksi", "No. invoice : "+invNo+' status akan diproses', "success");    
+              }else{
+                swal("Transaksi", "Tiket gagal dibuat", "success");
+              }
+              
+          },
+          error: function () {
+              swal("Transaksi", "Tiket gagal dibuat", "error");
+          }
+      });
+
       return false;
     }
   </script>
