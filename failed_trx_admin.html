@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SALMAN SHOP</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"> -->
+
+  <!-- Custom styles for this template -->
+  <link href="css/landing-page.min.css" rel="stylesheet">
+  <style type="text/css">
+  	.center {
+  		text-align: center;
+  	}
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <div class="navbar-brand text-white"><a href="admin.html"><i class="fa fa-arrow-left text-white"></i></a>&nbsp;&nbsp;SALMAN SHOP</div>
+      <!-- <a class="btn btn-outline-primary" href="javascript:;">Sign In</a> -->
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top: 70px; font-size: 12px !important;">
+		<!-- <h4 class="text-center">List Harga Pulsa</h4><br> -->
+
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table table-bordered table-sm center">
+					<thead>
+						<tr class="thead-dark">
+							<th colspan="3">Transaksi</th>
+						</tr>
+						<tr>
+						  <th scope="col" width="30%" class="align-middle">Tanggal</th>
+						  <th scope="col" width="30%" class="align-middle">No. Incoice</th>
+						  <th scope="col" width="30%" class="align-middle">Status</th>
+						</tr>
+					</thead>
+					<tbody id="tbodyTagihan">
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
+
+  <script type="text/javascript">
+  	// Your web app's Firebase configuration
+		var firebaseConfig = {
+		    apiKey: "AIzaSyCPSiurIE5DmdIuV2M2VX0IiLidUv5JGi8",
+		    authDomain: "salman-pulsa.firebaseapp.com",
+		    projectId: "salman-pulsa",
+		    storageBucket: "salman-pulsa.appspot.com",
+		    messagingSenderId: "931681268010",
+		    appId: "1:931681268010:web:e2798e9ba135ed56e42e53"
+		};
+	    // Initialize Firebase
+	  	firebase.initializeApp(firebaseConfig);
+
+	    var database = firebase.database();
+
+	    var total = 0;
+
+	    // Get Data
+	    firebase.database().ref('transaksi').orderByChild("status").equalTo("gagal").on('value', function (snapshot) {
+	        var value = snapshot.val();
+	        var htmls = [];
+
+	        $.each(value, function (index, value) {
+	            if (value) {
+	                htmls.push('<tr>\
+		                <td>' + value.tanggal + '</td>\
+		                <td>' + value.nomor + '</td>\
+		                <td>' + value.status + '</td>\
+		            	</tr>');
+	            	
+	            }
+	            
+
+	        });
+
+
+	        $('#tbodyTagihan').html(htmls);
+	    });
+  </script>
+
+</body>
+
+</html>
