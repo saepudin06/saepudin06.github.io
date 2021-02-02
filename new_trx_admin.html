@@ -77,6 +77,10 @@
                   </div>   
 
                   <div class="form-group col-md-12">
+                    <input id="token" type="text" class="form-control" name="token" placeholder="Token" autocomplete="off" autofocus>
+                  </div>  
+                  
+                  <div class="form-group col-md-12">
                       <input id="idd" type="hidden" class="form-control" name="idd">
                       <input id="nomor" type="hidden" class="form-control" name="nomor">
                       <input id="tanggal" type="hidden" class="form-control" name="tanggal">
@@ -165,6 +169,14 @@
       $( "#harga-lbl" ).text('Harga : ' + harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
       $( "#harga" ).val(harga);
       $( "#status-lbl" ).text('status : '+status.toUpperCase());
+
+      if(jenis == "token"){
+          $( "#keterangan" ).show();
+          $( "#token" ).show();
+      } else {
+          $( "#keterangan" ).hide();
+          $( "#token" ).hide();
+      }
     }
 
     $( "#send-msg" ).on('click', function(){
@@ -178,6 +190,8 @@
       var nama = $( "#nama" ).val();
       var jenis = $( "#jenis" ).val();
       var harga = $( "#harga" ).val();
+      var token = $( "#token" ).val();
+      var keterangan = $( "#keterangan" ).val();
 
       var postData = {
             nomor: nomor,
@@ -185,7 +199,9 @@
             nama: nama,
             jenis: jenis,
             harga: harga,
-            status: status
+            status: status,
+            keterangan : keterangan,
+            token: token
         };
       
       var updates = {};
@@ -193,9 +209,13 @@
       updates['/transaksi/' + id] = postData;
       firebase.database().ref().update(updates);
 
-      
-      var pesan = "No. invoice : "+nomor+"\n"+status.toUpperCase();
+      var pesan = "";
 
+      if(jenis == "token"){       
+        pesan = "No. invoice : "+nomor+"\nToken : "+token+"\nInfo : "+keterangan+"\n"+status.toUpperCase();
+      } else {
+        pesan = "No. invoice : "+nomor+"\n"+status.toUpperCase();
+      }
       $.ajax({
           url: 'https://api.telegram.org/bot1616490013:AAGYHtu0NjIcjNmIiCZY-qe21o50hZ5pM9M/sendMessage',
           type: 'POST',
