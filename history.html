@@ -122,8 +122,9 @@
     // Get Data
     firebase.database().ref('transaksi').on('value', function (snapshot) {
         var value = snapshot.val();
-        console.log(value);
+
         $.each(value, function (index, value) {
+          console.log(value);
             if (value) {
               console.log(value);
                   $('.list-history').append('<div class="row" style="padding: 5px;">'+
