@@ -192,8 +192,8 @@
           data: { chat_id: "-527747385", text : pesan} ,
           dataType: "json",
           success: function (response) {
-              if(response.ok){
-
+              if(response.ok){                
+                $( "#update-modal" ).modal('hide');
                 firebase.database().ref('transaksi/' + ID).set({
                     tanggal: dateStr,
                     nomor: invNo,
