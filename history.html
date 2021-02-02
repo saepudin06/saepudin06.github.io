@@ -122,16 +122,18 @@
     // Get Data
     firebase.database().ref('transaksi').on('value', function (snapshot) {
         var value = snapshot.val();
-
+        var htmls = [];
         $.each(value, function (index, value) {
             if (value) {
-                  $('.list-history').append('<div class="row" style="padding: 5px;">'+
+                  htmls.push('<div class="row" style="padding: 5px;">'+
                                    '<button class="btn btn-outline-dark btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+value.nomor+'\',\''+value.tanggal+'\',\''+value.nama+'\',\''+value.jenis+'\',\''+value.harga+'\',\''+value.status+'\')"><h6>'+value.nomor+'</h6>'
                                       + value.status.toUpperCase()
                                       +'</button></div>');
             }
             lastIndex = index;
         });
+
+        $('.list-history').html(htmls);
         
     });   
     
