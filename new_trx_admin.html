@@ -87,6 +87,10 @@
                   <div class="modal-footer">
                       <button type="button" class="btn btn-light" data-dismiss="modal">Tutup
                       </button>
+                      <button type="button" class="btn btn-warning" onclick="kirim('sukses')">Sukses
+                      </button>
+                      <button type="button" class="btn btn-danger" onclick="kirim('gagal')">Gagal
+                      </button>
                   </div>
               </div>
           </div>
@@ -151,6 +155,7 @@
       $( "#nomor-lbl" ).text(nomor);
       $( "#nomor" ).val(nomor);
       $( "#tanggal-lbl" ).text('Tanggal : '+tanggal);
+      $( "#tanggal" ).val(tanggal);
       $( "#nama-lbl" ).text('Nama : '+nama);
       $( "#nama" ).val(nama);
       $( "#jenis-lbl" ).text('Jenis : '+jenis);
@@ -163,6 +168,54 @@
     $( "#send-msg" ).on('click', function(){
       $( "#update-modal" ).modal('show');
     });
+
+    function kirim(status){
+      var id = $( "#idd" ).val();
+      var nomor = $( "#nomor" ).val();
+      var tanggal = $( "#tanggal" ).val();
+      var nama = $( "#nama" ).val();
+      var jenis = $( "#jenis" ).val();
+      var harga = $( "#harga" ).val();
+
+      var postData = {
+            nomor: nomor,
+            tanggal: tanggal,
+            nama: nama,
+            jenis: jenis,
+            harga: harga,
+            status: status
+        };
+      
+      var updates = {};
+
+      updates['/listharga/' + transaksi] = postData;
+      firebase.database().ref().update(updates);
+
+      
+      var pesan = "No. invoice : "+nomor+"\n"+status.toUpperCase();
+
+      $.ajax({
+          url: 'https://api.telegram.org/bot1616490013:AAGYHtu0NjIcjNmIiCZY-qe21o50hZ5pM9M/sendMessage',
+          type: 'POST',
+          data: { chat_id: "-527747385", text : pesan} ,
+          dataType: "json",
+          success: function (response) {
+              if(response.ok){                
+                $( "#update-modal" ).modal('hide');
+                
+                swal("Transaksi", "No. invoice : "+invNo+' status sukses', "success");    
+              }else{
+                swal("Transaksi", "Tiket gagal diubah", "success");
+              }
+              
+          },
+          error: function () {
+              swal("Transaksi", "Tiket gagal diubah", "error");
+          }
+      }); 
+      
+      return false;
+    }
   </script>
 
 </body>
