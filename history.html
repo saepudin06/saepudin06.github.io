@@ -124,11 +124,10 @@
         var value = snapshot.val();
 
         $.each(value, function (index, value) {
-          console.log(value);
             if (value) {
               console.log(value);
                   $('.list-history').append('<div class="row" style="padding: 5px;">'+
-                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+value.nomor+'\',\''+value.tanggal+'\',\''+value.nama+'\',\''+value.jenis+'\',\''+value.harga+'\',\''+value.status+'\')><h6>'+value.nomor+'</h6>'
+                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+value.nomor+'\',\''+value.tanggal+'\',\''+value.nama+'\',\''+value.jenis+'\',\''+value.harga+'\',\''+value.status+'\')"><h6>'+value.nomor+'</h6>'
                                       +'Status :'+ value.status
                                       +'</button></div>');
             }
