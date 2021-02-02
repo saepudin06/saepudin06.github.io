@@ -183,12 +183,12 @@
         ("00" + date.getSeconds()).slice(-2) + '.' + hp; 
 
       
-      var pesan = 'Tanggal : '+dateStr+'\nPesanan :'+ket+'\nJenis Pesanan : pulsa \nHarga : '+harga+'\nKirim ke : '+hp+'\nNo. invoice : '+invNo;
+      var pesan = 'Tanggal : '+dateStr+'%0APesanan :'+ket+'%0AJenis Pesanan : pulsa %0AHarga : '+harga+'%0AKirim ke : '+hp+'%0ANo. invoice : '+invNo;
 
       $.ajax({
           url: 'https://api.telegram.org/bot1616490013:AAGYHtu0NjIcjNmIiCZY-qe21o50hZ5pM9M/sendMessage',
           type: 'POST',
-          data: { chat_id: "-527747385", text : window.encodeURIComponent(pesan)} ,
+          data: { chat_id: "-527747385", text : "fdsfdsfsgggg\ndskfjhsdkjf" } ,
           dataType: "json",
           success: function (response) {
               swal("Transaksi", "No. invoice : "+invNo+' status akan diproses', "success");
