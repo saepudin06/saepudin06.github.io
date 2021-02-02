@@ -174,14 +174,15 @@
         ("00" + date.getMinutes()).slice(-2) + ":" +
         ("00" + date.getSeconds()).slice(-2);
 
-      var invNo =
+      var ID =
         ("00" + date.getDate()).slice(-2) + 
         ("00" + (date.getMonth() + 1)).slice(-2) + 
         date.getFullYear() + 
         ("00" + date.getHours()).slice(-2) + 
         ("00" + date.getMinutes()).slice(-2) + 
-        ("00" + date.getSeconds()).slice(-2) + '.' + hp; 
+        ("00" + date.getSeconds()).slice(-2); 
 
+      var invNo = "INV-" +ID + "." + hp;
       
       var pesan = "Tanggal : "+dateStr+"\nPesanan :"+ket+"\nJenis Pesanan : pulsa \nHarga : "+harga+"\nKirim ke : "+hp+"\nNo. invoice : "+invNo;
 
@@ -191,10 +192,24 @@
           data: { chat_id: "-527747385", text : pesan} ,
           dataType: "json",
           success: function (response) {
-              swal("Transaksi", "No. invoice : "+invNo+' status akan diproses', "success");
+              if(response.ok){
+
+                firebase.database().ref('transaksi/' + ID).set({
+                    tanggal: dateStr,
+                    nomor: invNo,
+                    nama: ket,
+                    jenis: "pulsa",
+                    harga: harga,
+                    status: "inproses"                    
+                });
+                swal("Transaksi", "No. invoice : "+invNo+' status akan diproses', "success");    
+              }else{
+                swal("Transaksi", "Tiket gagal dibuat", "success");
+              }
+              
           },
           error: function () {
-              swal("Transaksi", "Terjadi kesalahan", "error");
+              swal("Transaksi", "Tiket gagal dibuat", "error");
           }
       }); 
       
