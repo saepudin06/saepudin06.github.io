@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SALMAN SHOP</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"> -->
+
+  <!-- Custom styles for this template -->
+  <link href="css/landing-page.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-light bg-light fixed-top">
+    <div class="container">
+      <div class="navbar-brand"><a href="history.html"><i class="fa fa-arrow-left"></i></a>&nbsp;&nbsp;CETAK STRUK</div>
+      <!-- <a class="btn btn-outline-primary" href="javascript:;">Sign In</a> -->
+    </div>
+  </nav>
+
+  <!-- Masthead -->
+  <header class="bg-light" style="padding-top:55px">
+    <div class="container bg-warning">
+      <div class="row">
+        <div class="col-xl-12 text-center text-white mx-auto" style="padding: 10px;">
+          <h5>Transaksi</h5>
+        </div>
+    </div>
+  </div>
+  </header>
+
+  <div class="container" style="padding-top: 20px; font-size: 12px !important;">
+    <h6 class="text-center"><label id="lbl-invoice"></label></h6><br>
+
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-striped table-sm center">
+            <tr>
+              <td scope="col" width="30%" class="align-middle">Tanggal</td>
+              <td scope="col" width="60%" class="align-middle"><label id="lbl-tanggal"></label></td>
+            </tr>
+            <tr>
+              <td scope="col" width="30%" class="align-middle">Pembelian</td>
+              <td scope="col" width="60%" class="align-middle"><label id="lbl-nama"></label></td>
+            </tr>
+            <tr>
+              <td scope="col" width="30%" class="align-middle">Kategori</td>
+              <td scope="col" width="60%" class="align-middle"><label id="lbl-jenis"></label></td>
+            </tr>
+            <tr class="token">
+              <td scope="col" width="30%" class="align-middle">ID Pelanggan</td>
+              <td scope="col" width="60%" class="align-middle"><label id="lbl-id-pel"></label></td>
+            </tr>
+            <tr class="token">
+              <td scope="col" width="30%" class="align-middle">Token</td>
+              <td scope="col" width="60%" class="align-middle"><label id="lbl-token"></label></td>
+            </tr>
+            <tr>
+              <td scope="col" width="30%" class="align-middle">Status</td>
+              <td scope="col" width="60%" class="align-middle"><label id="lbl-status"></label></td>
+            </tr>
+            <tr class="nontoken">
+              <td scope="col" width="30%" class="align-middle">Nomor Hp.</td>
+              <td scope="col" width="60%" class="align-middle"><label id="lbl-hp"></label></td>
+            </tr>
+        </table>
+      </div>
+      <br>
+      <br>
+      <div class="col-md-12">
+        <table class="table table-striped table-sm center">
+            <tr>
+              <td scope="col" width="70%" class="align-middle" style="text-align: right;">Harga :</td>
+              <td scope="col" width="20%" class="align-middle" style="text-align: right;"><label id="lbl-harga"></label></td>
+            </tr>
+            <tr>
+              <td scope="col" width="70%" class="align-middle" style="text-align: right;">Total Harga :</td>
+              <td scope="col" width="20%" class="align-middle" style="text-align: right;"><label id="lbl-total"></label></td>
+            </tr>
+            </tr>
+        </table>
+      </div>
+
+      <div class="col-md-12">
+        <div style="text-align: center;"><strong>-> Terima Kasih <-</strong></div>
+      </div>  
+    </div>
+  </div>
+
+
+<div style="padding-bottom:50px"></div>
+  <!-- Footer -->
+<footer class="footer bg-light fixed-bottom" style="padding-top: 0px !important;padding-bottom: 0px !important;">
+    <div class="container">
+      <div class="row">
+        <button class="btn btn-lg btn-dark btn-block col-lg-12">Cetak</button>
+      </div>
+    </div>
+  </footer>
+
+  
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script type="text/javascript">
+    const urlParams = new URLSearchParams(window.location.search);
+    var nomor = urlParams.get('nomor');    
+    var tanggal = urlParams.get('tanggal');
+    var nama = urlParams.get('nama');
+    var jenis = urlParams.get('jenis');
+    var harga = urlParams.get('harga');
+    var status = urlParams.get('status');
+    var token = urlParams.get('token');
+    var keterangan = urlParams.get('keterangan');
+    var res = nomor.split(".");
+    var nopembeli = res[1];
+
+    if(jenis == "token"){
+      $( ".token" ).show();
+      $( ".nontoken" ).hide();
+    } else {
+      $( ".token" ).hide();
+      $( ".nontoken" ).show();
+    }
+
+    $( "#lbl-invoice" ).text(nomor);
+    $( "#lbl-tanggal" ).text(tanggal);
+    $( "#lbl-nama" ).text(nama);
+    $( "#lbl-jenis" ).text(jenis);
+    $( "#lbl-id-pel" ).text(nopembeli);
+    $( "#lbl-token" ).text(token);
+    $( "#lbl-hp" ).text(nopembeli);
+    $( "#lbl-status" ).text(status);
+    $( "#lbl-harga" ).text(harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
+    $( "#lbl-total" ).text(harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
+  </script>
+
+</body>
+
+</html>
