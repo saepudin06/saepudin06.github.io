@@ -150,6 +150,7 @@
     
     function send(ket, harga){
       $( "#send-msg" ).prop( "disabled", false );
+      $( "#hp" ).val('');
       $( "#ket" ).val(ket);
       $( "#harga" ).val(harga);
       $( "#ket-lbl" ).text(ket);
@@ -200,7 +201,8 @@
                     nama: ket,
                     jenis: "pulsa",
                     harga: harga,
-                    status: "inproses"                    
+                    status: "inproses",
+                    keterangan: ""                    
                 });
                 
                 swal("Transaksi", "No. invoice : "+invNo+' status akan diproses', "success");    
