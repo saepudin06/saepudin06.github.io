@@ -166,7 +166,7 @@
 	    var lastIndex = 0;
 
 	    // Get Data
-	    firebase.database().ref('listharga').on('value', function (snapshot) {
+	    firebase.database().ref('listharga').orderByChild("jenis").equalTo("pulsa").on('value', function (snapshot) {
 	        var value = snapshot.val();
 	        var htmlTelkomsel = [];
 	        var htmlIndosat = [];
@@ -177,42 +177,42 @@
 
 	        $.each(value, function (index, value) {
 	            if (value) {
-	                if(value.operator == 'telkomsel' && value.jenis == 'pulsa'){
+	                if(value.operator == 'telkomsel'){
 		                htmlTelkomsel.push('<tr>\
 		                <td>' + value.keterangan + '</td>\
 		                <td>' + value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</td>\
 		            	</tr>');
 	            	}
 
-	            	if(value.operator == 'indosat' && value.jenis == 'pulsa'){
+	            	if(value.operator == 'indosat'){
 		                htmlIndosat.push('<tr>\
 		                <td>' + value.keterangan + '</td>\
 		                <td>' + value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</td>\
 		            	</tr>');
 	            	}
 
-	            	if(value.operator == 'xl' && value.jenis == 'pulsa'){
+	            	if(value.operator == 'xl'){
 		                htmlXL.push('<tr>\
 		                <td>' + value.keterangan + '</td>\
 		                <td>' + value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</td>\
 		            	</tr>');
 	            	}
 
-	            	if(value.operator == 'three' && value.jenis == 'pulsa'){
+	            	if(value.operator == 'three'){
 		                htmlThree.push('<tr>\
 		                <td>' + value.keterangan + '</td>\
 		                <td>' + value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</td>\
 		            	</tr>');
 	            	}
 
-	            	if(value.operator == 'axis' && value.jenis == 'pulsa'){
+	            	if(value.operator == 'axis'){
 		                htmlAxis.push('<tr>\
 		                <td>' + value.keterangan + '</td>\
 		                <td>' + value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</td>\
 		            	</tr>');
 	            	}
 
-	            	if(value.operator == 'smartfren' && value.jenis == 'pulsa'){
+	            	if(value.operator == 'smartfren'){
 		                htmlSmart.push('<tr>\
 		                <td>' + value.keterangan + '</td>\
 		                <td>' + value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</td>\
