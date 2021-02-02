@@ -120,7 +120,7 @@
     var lastIndex = 0;
     
     // Get Data
-    firebase.database().ref('transaksi').orderBy("tanggal", "desc").on('value', function (snapshot) {
+    firebase.database().ref('transaksi').orderBy(firebase.firestore.FieldPath.documentId()).on('value', function (snapshot) {
         var value = snapshot.val();
 
         $.each(value, function (index, value) {
