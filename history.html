@@ -68,7 +68,7 @@
                   </div>
                   
                   <div class="form-group col-md-12" style="padding-top: 20px;">
-                    <label id="nomor-lbl"></label><br>
+                    <strong><label id="nomor-lbl"></label></strong><br>
                     <label id="tanggal-lbl"></label><br>
                     <label id="nama-lbl"></label><br>
                     <label id="jenis-lbl"></label><br>
@@ -125,15 +125,15 @@
 
         $.each(value, function (index, value) {
             if (value) {
-              console.log(value.nomor);
-                  $('.list-history').append('<div class="row" style="padding: 5px;">'+
-                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;"><h6>'+value.nomor+'</h6>'
-                                      +'Status :'+ value.status
-                                      +'</button></div>');
+              // console.log(value.nomor);
                   // $('.list-history').append('<div class="row" style="padding: 5px;">'+
-                  //                  '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+value.nomor+'\',\''+value.tanggal+'\',\''+value.nama+'\',\''+value.jenis+'\',\''+value.harga+'\',\''+value.status+'\')"><h6>'+value.nomor+'</h6>'
+                  //                  '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;"><h6>'+value.nomor+'</h6>'
                   //                     +'Status :'+ value.status
                   //                     +'</button></div>');
+                  $('.list-history').append('<div class="row" style="padding: 5px;">'+
+                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+value.nomor+'\',\''+value.tanggal+'\',\''+value.nama+'\',\''+value.jenis+'\',\''+value.harga+'\',\''+value.status+'\')"><h6>'+value.nomor+'</h6>'
+                                      + value.status.toUpperCase()
+                                      +'</button></div>');
             }
             lastIndex = index;
         });
@@ -142,7 +142,7 @@
     
     function send(nomor, tanggal, nama, jenis, harga, status){
       $( "#send-msg" ).prop( "disabled", false );
-      $( "#nomor-lbl" ).text('<strong>'+nomor+'</strong>');
+      $( "#nomor-lbl" ).text(nomor);
       $( "#tanggal-lbl" ).text('Tanggal : '+tanggal);
       $( "#nama-lbl" ).text('Nama : '+nama);
       $( "#jenis-lbl" ).text('Jenis : '+jenis);
