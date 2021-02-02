@@ -76,6 +76,14 @@
                     <label id="status-lbl"></label>
                   </div>   
 
+                  <div class="form-group col-md-12">
+                      <input id="idd" type="hidden" class="form-control" name="idd">
+                      <input id="tanggal" type="hidden" class="form-control" name="tanggal">
+                      <input id="nama" type="hidden" class="form-control" name="nama">
+                      <input id="jenis" type="hidden" class="form-control" name="jenis">
+                      <input id="harga" type="hidden" class="form-control" name="harga">
+                  </div>
+
                   <div class="modal-footer">
                       <button type="button" class="btn btn-light" data-dismiss="modal">Tutup
                       </button>
@@ -120,31 +128,35 @@
     var lastIndex = 0;
     
     // Get Data
-    firebase.database().ref('transaksi').on('value', function (snapshot) {
+    firebase.database().ref('transaksi').orderByChild("status").equalTo("inproses").on('value', function (snapshot) {
         var value = snapshot.val();
         var htmls = [];
         $.each(value, function (index, value) {
             if (value) {
-                  console.log(index);
                   htmls.push('<div class="row" style="padding: 5px;">'+
-                                   '<button class="btn btn-outline-dark btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+value.nomor+'\',\''+value.tanggal+'\',\''+value.nama+'\',\''+value.jenis+'\',\''+value.harga+'\',\''+value.status+'\')"><h6>'+value.nomor+'</h6>'
+                                   '<button class="btn btn-outline-dark btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+index+'\', \''+value.nomor+'\',\''+value.tanggal+'\',\''+value.nama+'\',\''+value.jenis+'\',\''+value.harga+'\',\''+value.status+'\')"><h6>'+value.nomor+'</h6>'
                                       + value.status.toUpperCase()
                                       +'</button></div>');
             }
-            lastIndex = index;
+
         });
 
         $('.list-new-trx').html(htmls);
         
     });   
     
-    function send(nomor, tanggal, nama, jenis, harga, status){
+    function send(id, nomor, tanggal, nama, jenis, harga, status){
       $( "#send-msg" ).prop( "disabled", false );
+      $( "#idd" ).val(id);
       $( "#nomor-lbl" ).text(nomor);
+      $( "#nomor" ).val(nomor);
       $( "#tanggal-lbl" ).text('Tanggal : '+tanggal);
       $( "#nama-lbl" ).text('Nama : '+nama);
+      $( "#nama" ).val(nama);
       $( "#jenis-lbl" ).text('Jenis : '+jenis);
+      $( "#jenis" ).val(jenis);
       $( "#harga-lbl" ).text('Harga : ' + harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
+      $( "#harga" ).val(harga);
       $( "#status-lbl" ).text('status : '+status.toUpperCase());
     }
 
