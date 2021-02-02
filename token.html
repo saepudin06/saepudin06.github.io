@@ -134,16 +134,18 @@
     // Get Data
     firebase.database().ref('listharga').on('value', function (snapshot) {
         var value = snapshot.val();
-
+        var htmls = [];
         $.each(value, function (index, value) {
             if (value) {
                 if(value.operator == 'pln' && value.jenis == 'token'){
-                  $('.list-harga').append('<div class="row" style="padding: 5px;">'+
+                  htmls.push('<div class="row" style="padding: 5px;">'+
                                    '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+value.keterangan+'\',\''+value.harga+'\')"><h6>'+value.keterangan+'</h6> Harga : '+value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</button></div>');
               }
             }
             lastIndex = index;
         });
+
+        $('.list-harga').html(htmls);
         
     }); 
 
