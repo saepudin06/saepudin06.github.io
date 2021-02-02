@@ -149,49 +149,12 @@
     </div>
   </section>
 
+  <div style="padding-bottom:50px"></div>
   <!-- Footer -->
-  <footer class="footer bg-light">
+  <footer class="footer bg-light fixed-bottom" style="padding-top: 0px !important;padding-bottom: 0px !important;">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-          <ul class="list-inline mb-2">
-            <li class="list-inline-item">
-              <a href="javascript:;">About</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="javascript:;">Contact</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="javascript:;">Terms of Use</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="javascript:;">Privacy Policy</a>
-            </li>
-          </ul>
-          <p class="text-muted small mb-4 mb-lg-0">&copy; Asep Saepudin 2021. All Rights Reserved.</p>
-        </div>
-        <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item mr-3">
-              <a href="javascript:;">
-                <i class="fab fa-facebook fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item mr-3">
-              <a href="javascript:;">
-                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="javascript:;">
-                <i class="fab fa-instagram fa-2x fa-fw"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
+        <button onclick="goTopage('history.html')" class="btn btn-lg btn-dark btn-block col-lg-12">History transaksi</button>
       </div>
     </div>
   </footer>
@@ -200,6 +163,9 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript">
+    function goTopage(param){
+      window.location.href = param;
+    }
     function listpulsa(param){
       window.location.href = "pulsa.html?opt="+param;
     }
