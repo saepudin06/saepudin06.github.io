@@ -73,8 +73,9 @@
               <i class="icon-screen-desktop m-auto text-primary"></i>
             </div>
             <h3>Transaksi</h3>
-            <p class="lead mb-2"><button class="btn btn-outline-primary btn-block" onclick="listpulsa('telkomsel')">Baru</button></p>
-            <p class="lead mb-2"><button class="btn btn-outline-danger btn-block" onclick="listpakedata('telkomsel')">Sukses</button></p>
+            <p class="lead mb-2"><button class="btn btn-outline-primary btn-block" onclick="transaksi('new_trx_admin.html', 'inproses')">Baru</button></p>
+            <p class="lead mb-2"><button class="btn btn-outline-danger btn-block" onclick="transaksi('success_trx_admin.html', 'sukses')">Sukses</button></p>
+            <p class="lead mb-2"><button class="btn btn-outline-danger btn-block" onclick="transaksi('failed_trx_admin.html', 'gagal')">Gagal</button></p>
           </div>
         </div>
 
@@ -86,7 +87,7 @@
             <h3>List Harga</h3>
             <p class="lead mb-2"><button class="btn btn-outline-primary btn-block" onclick="goTopage('listpulsa_admin.html')">Pulsa</button></p>
             <p class="lead mb-2"><button class="btn btn-outline-danger btn-block" onclick="goTopage('listpaketdata_admin.html')">Paket Data</button></p>
-            <p class="lead mb-2"><button class="btn btn-outline-danger btn-block" onclick="goTopage('listtoken_admin.html')">Token</button></p>
+            <p class="lead mb-2"><button class="btn btn-outline-success btn-block" onclick="goTopage('listtoken_admin.html')">Token</button></p>
           </div>
         </div>
         
@@ -96,7 +97,7 @@
               <i class="icon-layers m-auto text-primary"></i>
             </div>
             <h3>Daftar Tagihan</h3>
-            <p class="lead mb-2"><button class="btn btn-outline-primary btn-block" onclick="listpulsa('xl')">Tagihan</button></p>
+            <p class="lead mb-2"><button class="btn btn-outline-primary btn-block" onclick="goTopage('tagihan_admin.html')">Tagihan</button></p>
           </div>
         </div>
 
@@ -111,17 +112,11 @@
     function goTopage(param){
       window.location.href = param;
     }
-    function listpulsa(param){
-      window.location.href = "pulsa.html?opt="+param;
+
+    function transaksi(url, param){
+      window.location.href = url+"?status="+param;
     }
 
-    function listtoken(){
-      window.location.href = "token.html";
-    }
-
-    function listpakedata(param){
-      window.location.href = "paketdata.html?opt="+param;
-    }
   </script>
 
 </body>
