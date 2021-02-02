@@ -68,15 +68,19 @@
             </tr>
             <tr class="token">
               <td scope="col" width="30%" class="align-middle">Token</td>
-              <td scope="col" width="60%" class="align-middle"><label id="lbl-token"></label></td>
+              <td scope="col" width="60%" class="align-middle"><strong><label id="lbl-token"></label></strong></td>
             </tr>
-            <tr>
-              <td scope="col" width="30%" class="align-middle">Status</td>
-              <td scope="col" width="60%" class="align-middle"><label id="lbl-status"></label></td>
+            <tr class="token">
+              <td scope="col" width="30%" class="align-middle">Nama Pelanggan</td>
+              <td scope="col" width="60%" class="align-middle"><label id="lbl-nama-pel"></label></td>
             </tr>
             <tr class="nontoken">
               <td scope="col" width="30%" class="align-middle">Nomor Hp.</td>
               <td scope="col" width="60%" class="align-middle"><label id="lbl-hp"></label></td>
+            </tr>
+            <tr>
+              <td scope="col" width="30%" class="align-middle">Status</td>
+              <td scope="col" width="60%" class="align-middle"><label id="lbl-status"></label></td>
             </tr>
         </table>
       </div>
@@ -133,12 +137,17 @@
     var res = nomor.split(".");
     var nopembeli = res[1];
 
+    if(harga == "") harga = 0;
+    
     if(jenis == "token"){
-      $( ".token" ).show();
-      $( ".nontoken" ).hide();
+      // $( ".token" ).show();
+      $( ".nontoken" ).remove();
+
+      var tokenlbl = token.match(/.{1,4}/g).toString().replaceAll(","," ");
+      token = tokenlbl;
     } else {
-      $( ".token" ).hide();
-      $( ".nontoken" ).show();
+      $( ".token" ).remove();
+      // $( ".nontoken" ).show();
     }
 
     $( "#lbl-invoice" ).text(nomor);
@@ -146,6 +155,7 @@
     $( "#lbl-nama" ).text(nama);
     $( "#lbl-jenis" ).text(jenis);
     $( "#lbl-id-pel" ).text(nopembeli);
+    $( "#lbl-nama-pel" ).text(keterangan);
     $( "#lbl-token" ).text(token);
     $( "#lbl-hp" ).text(nopembeli);
     $( "#lbl-status" ).text(status);
