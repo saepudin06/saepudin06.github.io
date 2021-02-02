@@ -188,7 +188,7 @@
       
       var updates = {};
 
-      updates['/listharga/' + transaksi] = postData;
+      updates['/transaksi/' + id] = postData;
       firebase.database().ref().update(updates);
 
       
