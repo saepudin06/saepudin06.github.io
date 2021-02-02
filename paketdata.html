@@ -169,6 +169,11 @@
       var harga = $( "#harga" ).val();
       var hp = $( "#hp" ).val();
 
+      if(hp == ""){
+        swal("Peringatan", "Nomor Handphone belum diisi");
+        return false;
+      }
+      
       var date = new Date();
       var dateStr =
         ("00" + date.getDate()).slice(-2) + "/" +
@@ -208,7 +213,7 @@
                     keterangan: ""                    
                 });
                 
-                swal("Transaksi", "No. invoice : "+invNo+' status akan diproses', "success");    
+                swal("Transaksi", "No. invoice : "+invNo+"\n status akan diproses", "success");    
               }else{
                 swal("Transaksi", "Tiket gagal dibuat", "success");
               }
