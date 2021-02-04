@@ -105,6 +105,10 @@
     }
 
     function masuk(){
+
+      if($("#name").val() == ""){
+        return false;
+      }
       // Store
       localStorage.setItem("name", $("#name").val());
 
