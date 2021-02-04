@@ -193,7 +193,7 @@
 
       var invNo = "INV-" +ID + "." + hp;
       
-      var pesan = "Tanggal : "+dateStr+"\nPesanan :"+ket+"\nJenis Pesanan : paket data \nHarga : "+harga+"\nKirim ke : "+hp+"\nNo. invoice : "+invNo;
+      var pesan = localStorage.getItem("name")+"\nTanggal : "+dateStr+"\nPesanan :"+ket+"\nJenis Pesanan : paket data \nHarga : "+harga+"\nKirim ke : "+hp+"\nNo. invoice : "+invNo;
 
       $.ajax({
           url: 'https://api.telegram.org/bot1616490013:AAGYHtu0NjIcjNmIiCZY-qe21o50hZ5pM9M/sendMessage',
