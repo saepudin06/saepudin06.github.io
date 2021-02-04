@@ -47,6 +47,9 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="listtoken.html">List Token</a>
                 </li>
+                <li class="nav-item">
+                    <button class="btn btn-danger btn-sm text-white" onclick="keluar()">Keluar</button>
+                </li>
             </ul>
         </div>
     </nav>
@@ -163,6 +166,13 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript">
+
+    var name = localStorage.getItem("name");
+    
+    if(name == "null"){
+      window.location.href = "login.html";
+    }
+
     function goTopage(param){
       window.location.href = param;
     }
@@ -176,6 +186,14 @@
 
     function listpakedata(param){
       window.location.href = "paketdata.html?opt="+param;
+    }
+
+    function keluar(){
+      // Store
+      localStorage.removeItem("name");
+
+      window.location.href = "login.html";
+
     }
   </script>
 
