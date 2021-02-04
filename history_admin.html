@@ -28,7 +28,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container">
-      <div class="navbar-brand text-white"><a href="index.html"><i class="fa fa-arrow-left text-white"></i></a>&nbsp;&nbsp;SALMAN SHOP</div>
+      <div class="navbar-brand text-white"><a href="admin.html"><i class="fa fa-arrow-left text-white"></i></a>&nbsp;&nbsp;SALMAN SHOP</div>
       <!-- <a class="btn btn-outline-primary" href="javascript:;">Sign In</a> -->
     </div>
   </nav>
@@ -75,6 +75,14 @@
                     <label id="status-lbl"></label>
                   </div> 
 
+                  <div class="form-group col-md-12" id="div-ket">
+                    <input id="keterangan" type="text" class="form-control" name="keterangan" placeholder="Info" required autofocus autocomplete="off">
+                  </div>
+
+                  <div class="form-group col-md-12" id="div-token">
+                    <input id="token" type="text" class="form-control" name="token" placeholder="Token" required autofocus autocomplete="off">
+                  </div>
+
                   <div class="form-group col-md-12">
                       <input id="nomor" type="hidden" class="form-control" name="nomor">
                       <input id="tanggal" type="hidden" class="form-control" name="tanggal">
@@ -91,7 +99,7 @@
                   <div class="modal-footer">
                       <button type="button" class="btn btn-light" data-dismiss="modal">Tutup
                       </button>
-                      <button type="button" class="btn btn-success" onclick="gotoPage('history_detail.html')">Cetak
+                      <button type="button" class="btn btn-success" onclick="gotoPage('history_admin_detail.html')">Cetak
                       </button>
                   </div>
               </div>
@@ -134,7 +142,7 @@
     var lastIndex = 0;
     
     // Get Data
-    firebase.database().ref('transaksi').on('value', function (snapshot) {
+    firebase.database().ref('transaksiadmin').on('value', function (snapshot) {
         var value = snapshot.val();
         var htmls = [];
         $.each(value, function (index, value) {
@@ -170,6 +178,15 @@
     }
 
     $( "#send-msg" ).on('click', function(){
+      var jenis = $( "#jenis" ).val();
+      if(jenis == "token") {
+        $( "#div-token" ).show();
+        $( "#div-ket" ).show();
+      }else{
+        $( "#div-token" ).hide();
+        $( "#div-ket" ).hide();
+      }
+
       $( "#update-modal" ).modal('show');
     });
 
