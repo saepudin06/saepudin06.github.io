@@ -23,7 +23,7 @@
 
 </head>
 
-<body>
+<body class="bg-light">
 
   <!-- Navigation -->
   <nav class="navbar navbar-dark bg-dark fixed-top">
@@ -208,7 +208,8 @@
                     harga: harga,
                     status: "inproses",
                     keterangan: "",                    
-                    token: ""                     
+                    token: "",
+                    user: localStorage.getItem("name")                     
                 });
                 
                 swal("Transaksi", "No. invoice : "+invNo+' status akan diproses', "success");  

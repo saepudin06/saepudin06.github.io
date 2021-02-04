@@ -96,7 +96,24 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
   <script type="text/javascript">
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyCPSiurIE5DmdIuV2M2VX0IiLidUv5JGi8",
+        authDomain: "salman-pulsa.firebaseapp.com",
+        projectId: "salman-pulsa",
+        storageBucket: "salman-pulsa.appspot.com",
+        messagingSenderId: "931681268010",
+        appId: "1:931681268010:web:e2798e9ba135ed56e42e53"
+    };
+      // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    var database = firebase.database();
 
     var name = localStorage.getItem("name");
     // console.log(name);
@@ -105,16 +122,30 @@
     }
 
     function masuk(){
-
-      if($("#name").val() == undefined || $("#name").val() == ""){
+      if($("#nama").val() == ""){
         return false;
       }
-      // Store
-      localStorage.setItem("name", $("#name").val());
+      // Get Data
+      firebase.database().ref('login').on('value', function (snapshot) {
+        var value = snapshot.val();
+        $.each(value, function (index, value) {
+            if (value) {
+                if(value == $("#nama").val()){
+                    // Store
+                    localStorage.setItem("name", value);
+                    if(localStorage.getItem("name") != "null"){
+                      window.location.href = "index.html";
+                    }
+                }else{
+                  swal("User tidak ditemukan");
+                }
+            }
+        });
+        
+      });
+      
 
-      if(localStorage.getItem("name") != "null"){
-        window.location.href = "index.html";
-      }
+      
 
     }
     
