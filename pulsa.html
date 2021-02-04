@@ -213,7 +213,10 @@
                     token: ""                    
                 });
                 
-                swal("Transaksi", "No. invoice : "+invNo+' status akan diproses', "success");    
+                swal("Transaksi", "No. invoice : "+invNo+' status akan diproses', "success");   
+                setTimeout(function(){
+                  window.location.href = "history.html";   
+                }, 1000);   
               }else{
                 swal("Transaksi", "Tiket gagal dibuat", "success");
               }
