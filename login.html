@@ -130,7 +130,7 @@
         var value = snapshot.val();
         $.each(value, function (index, value) {
             if (value) {
-                if(value == $("#nama").val()){
+                if(value.username == $("#nama").val()){
                     // Store
                     localStorage.setItem("name", value);
                     if(localStorage.getItem("name") != "null"){
