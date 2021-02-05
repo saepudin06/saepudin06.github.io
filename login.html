@@ -132,7 +132,7 @@
             if (value) {
                 if(value.username == $("#nama").val()){
                     // Store
-                    localStorage.setItem("name", value);
+                    localStorage.setItem("name", value.username);
                     if(localStorage.getItem("name") != "null"){
                       window.location.href = "index.html";
                     }
