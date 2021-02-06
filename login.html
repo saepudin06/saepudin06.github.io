@@ -139,7 +139,7 @@
 
         if(cek){
           // Store
-            localStorage.setItem("name", value.username);
+            localStorage.setItem("name", $("#nama").val());
             if(localStorage.getItem("name") != "null"){
                 window.location.href = "index.html";
             }
