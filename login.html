@@ -128,19 +128,24 @@
       // Get Data
       firebase.database().ref('login').on('value', function (snapshot) {
         var value = snapshot.val();
+        var cek = false;
         $.each(value, function (index, value) {
             if (value) {
                 if(value.username == $("#nama").val()){
-                    // Store
-                    localStorage.setItem("name", value.username);
-                    if(localStorage.getItem("name") != "null"){
-                      window.location.href = "index.html";
-                    }
-                }else{
-                  swal("User tidak ditemukan");
+                  cek = true;
                 }
             }
         });
+
+        if(cek){
+          // Store
+            localStorage.setItem("name", value.username);
+            if(localStorage.getItem("name") != "null"){
+                window.location.href = "index.html";
+            }
+        }else{
+              swal("User tidak ditemukan");
+        }
         
       });
       
