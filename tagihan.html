@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SALMAN SHOP</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"> -->
+
+  <!-- Custom styles for this template -->
+  <link href="css/landing-page.min.css" rel="stylesheet">
+  <style type="text/css">
+  	.center {
+  		text-align: center;
+  	}
+  	.nav-link {
+		display: block;
+		padding: 2px !important;
+	}
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <!-- <nav class="navbar navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <div class="navbar-brand text-white"><a href="admin.html"><i class="fa fa-arrow-left text-white"></i></a>&nbsp;&nbsp;SALMAN SHOP</div>
+    </div>
+  </nav> -->
+  <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand text-white" href="javascript:;">&nbsp;&nbsp;SALMAN SHOP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="listpulsa.html">List Pulsa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="listpaketdata.html">List Paket Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="listtoken.html">List Token</a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-danger btn-sm text-white" onclick="keluar()">Keluar</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+  <div class="container" style="padding-top: 70px; font-size: 12px !important;">
+		<!-- <h4 class="text-center">List Harga Pulsa</h4><br> -->
+
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table table-bordered table-sm center">
+					<thead>
+						<tr class="thead-dark">
+							<th colspan="3">List Tagihan</th>
+						</tr>
+						<tr>
+						  <th scope="col" width="30%" class="align-middle">Tanggal</th>
+						  <th scope="col" width="30%" class="align-middle">No. Incoice</th>
+						  <th scope="col" width="30%" class="align-middle">Jumlah</th>
+						</tr>
+					</thead>
+					<tbody id="tbodyTagihan">
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div style="padding-bottom:50px"></div>
+  <!-- Footer -->
+  <footer class="footer fixed-bottom" style="padding: 5px !important;">
+    <!-- <div class="container">
+      <div class="row">
+        <button onclick="goTopage('history.html')" class="btn btn-lg btn-dark btn-block col-lg-12">History transaksi</button>
+      </div>
+    </div> -->
+    <nav class="nav nav-pills nav-fill navbar-dark">
+	  <a class="nav-item nav-link" href="index.html"><button class="btn btn-dark btn-block" style="font-size: 14px !important"><i class="icon-home m-auto"></i> Home</button></a>
+	  <a class="nav-item nav-link" href="history.html"><button class="btn btn-dark btn-block" style="font-size: 14px !important"><i class="icon-docs m-auto"></i> History</button></a>
+	  <a class="nav-item nav-link" href="tagihan.html"><button class="btn btn-warning btn-block" style="font-size: 14px !important"><i class="icon-screen-desktop m-auto"> Tagihan</i></button></a>
+	</nav>
+  </footer>
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
+
+  <script type="text/javascript">
+  	// Your web app's Firebase configuration
+		var firebaseConfig = {
+		    apiKey: "AIzaSyCPSiurIE5DmdIuV2M2VX0IiLidUv5JGi8",
+		    authDomain: "salman-pulsa.firebaseapp.com",
+		    projectId: "salman-pulsa",
+		    storageBucket: "salman-pulsa.appspot.com",
+		    messagingSenderId: "931681268010",
+		    appId: "1:931681268010:web:e2798e9ba135ed56e42e53"
+		};
+	    // Initialize Firebase
+	  	firebase.initializeApp(firebaseConfig);
+
+	    var database = firebase.database();
+
+	    var total = 0;
+
+	    // Get Data
+	    firebase.database().ref('transaksi').orderByChild("status").equalTo("sukses").on('value', function (snapshot) {
+	        var value = snapshot.val();
+	        var htmls = [];
+
+	        $.each(value, function (index, value) {
+	            if (value) {
+	            	if(value.user == localStorage.getItem("name")){
+		                htmls.push('<tr>\
+			                <td>' + value.tanggal + '</td>\
+			                <td>' + value.nomor + '</td>\
+			                <td>' + value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</td>\
+			            	</tr>');
+		            	
+		                total = total + parseFloat(value.harga);
+		            }
+	            }
+	            
+
+	        });
+
+	        htmls.push('<tr>\
+		                <td colspan="2">Total</td>\
+		                <td>' + total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</td>\
+		            	</tr>');
+
+	        $('#tbodyTagihan').html(htmls);
+	    });
+  </script>
+
+</body>
+
+</html>
