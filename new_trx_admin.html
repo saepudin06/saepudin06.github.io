@@ -193,7 +193,7 @@
       var token = $( "#token" ).val();
       
       if(token != ""){
-        token = token.match(/.{1,4}/g).toString().replaceAll(","," ");
+        token = token.match(/.{1,4}/g).toString().replaceAll(",","-");
       }
       
       var keterangan = $( "#keterangan" ).val();
