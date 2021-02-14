@@ -73,6 +73,7 @@
                     <label id="nama-lbl"></label><br>
                     <label id="jenis-lbl"></label><br>
                     <label id="harga-lbl"></label><br>
+                    <label id="user-lbl"></label><br>
                     <label id="status-lbl"></label>
                   </div>   
 
@@ -170,7 +171,8 @@
       $( "#harga-lbl" ).text('Harga : ' + harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
       $( "#harga" ).val(harga);
       $( "#user" ).val(user);
-      $( "#status-lbl" ).text('status : '+status.toUpperCase());
+      $( "#status-lbl" ).text('Status : '+status.toUpperCase());
+      $( "#user-lbl" ).text('User : '+user);
 
       if(jenis == "token"){
           $( "#keterangan" ).show();
