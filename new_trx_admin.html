@@ -86,6 +86,7 @@
                       <input id="tanggal" type="hidden" class="form-control" name="tanggal">
                       <input id="nama" type="hidden" class="form-control" name="nama">
                       <input id="jenis" type="hidden" class="form-control" name="jenis">
+                      <input id="user" type="hidden" class="form-control" name="user">
                       <input id="harga" type="hidden" class="form-control" name="harga">
                       <input id="keterangan" type="text" class="form-control" name="keterangan" placeholder="Keterangan" autocomplete="off" autofocus>
                   </div>
@@ -144,7 +145,7 @@
         $.each(value, function (index, value) {
             if (value) {
                   htmls.push('<div class="row" style="padding: 5px;">'+
-                                   '<button class="btn btn-outline-dark btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+index+'\', \''+value.nomor+'\',\''+value.tanggal+'\',\''+value.nama+'\',\''+value.jenis+'\',\''+value.harga+'\',\''+value.status+'\')"><h6>'+value.nomor+'</h6>'
+                                   '<button class="btn btn-outline-dark btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+index+'\', \''+value.nomor+'\',\''+value.tanggal+'\',\''+value.nama+'\',\''+value.jenis+'\',\''+value.harga+'\',\''+value.status+'\',\''+value.user+'\')"><h6>'+value.nomor+'</h6>'
                                       + value.status.toUpperCase()
                                       +'</button></div>');
             }
@@ -155,7 +156,7 @@
         
     });   
     
-    function send(id, nomor, tanggal, nama, jenis, harga, status){
+    function send(id, nomor, tanggal, nama, jenis, harga, status, user){
       $( "#send-msg" ).prop( "disabled", false );
       $( "#idd" ).val(id);
       $( "#nomor-lbl" ).text(nomor);
@@ -168,6 +169,7 @@
       $( "#jenis" ).val(jenis);
       $( "#harga-lbl" ).text('Harga : ' + harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
       $( "#harga" ).val(harga);
+      $( "#user" ).val(user);
       $( "#status-lbl" ).text('status : '+status.toUpperCase());
 
       if(jenis == "token"){
@@ -191,9 +193,10 @@
       var jenis = $( "#jenis" ).val();
       var harga = $( "#harga" ).val();
       var token = $( "#token" ).val();
+      var user = $( "#user" ).val();
       
       if(token != ""){
-        token = token.match(/.{1,4}/g).toString().replaceAll(",","-");
+        token = token.match(/.{1,4}/g).toString().replaceAll(",","");
       }
       
       var keterangan = $( "#keterangan" ).val();
@@ -206,7 +209,8 @@
             harga: harga,
             status: status,
             keterangan : keterangan,
-            token: token
+            token: token,
+            user: user
         };
       
       var updates = {};
@@ -217,9 +221,9 @@
       var pesan = "";
 
       if(jenis == "token"){       
-        pesan = "No. invoice : "+nomor+"\nToken : "+token+"\nInfo : "+keterangan+"\n"+status.toUpperCase();
+        pesan = user+"\nNo. invoice : "+nomor+"\nToken : "+token+"\nInfo : "+keterangan+"\n"+status.toUpperCase();
       } else {
-        pesan = "No. invoice : "+nomor+"\n"+status.toUpperCase();
+        pesan = user+"\nNo. invoice : "+nomor+"\n"+status.toUpperCase();
       }
       $.ajax({
           url: 'https://api.telegram.org/bot1616490013:AAGYHtu0NjIcjNmIiCZY-qe21o50hZ5pM9M/sendMessage',
