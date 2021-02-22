@@ -197,10 +197,6 @@
       var token = $( "#token" ).val();
       var user = $( "#user" ).val();
       
-      if(token != ""){
-        token = token.match(/.{1,4}/g).toString().replaceAll(",","");
-      }
-      
       var keterangan = $( "#keterangan" ).val();
 
       var postData = {
@@ -223,7 +219,7 @@
       var pesan = "";
 
       if(jenis == "token"){       
-        pesan = user+"\nNo. invoice : "+nomor+"\nToken : "+token+"\nInfo : "+keterangan+"\n"+status.toUpperCase();
+        pesan = user+"\nNo. invoice : "+nomor+"\nToken : "+token.match(/.{1,4}/g).toString().replaceAll(",","-");+"\nInfo : "+keterangan+"\n"+status.toUpperCase();
       } else {
         pesan = user+"\nNo. invoice : "+nomor+"\n"+status.toUpperCase();
       }
