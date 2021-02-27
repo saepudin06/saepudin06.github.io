@@ -88,7 +88,7 @@
                   <div class="modal-footer">
                       <button type="button" class="btn btn-light" data-dismiss="modal">Batal
                       </button>
-                      <button type="button" class="btn btn-warning" onclick="kirim()">Kirim
+                      <button type="button" class="btn btn-warning kirim" onclick="kirim()">Kirim
                       </button>
                   </div>
               </div>
@@ -168,6 +168,7 @@
     });
 
     function kirim(){
+      $(".kirim").prop('disabled', true);
       var ket = $( "#ket" ).val();
       var harga = $( "#harga" ).val();
       var hp = $( "#hp" ).val();
@@ -231,7 +232,7 @@
               swal("Transaksi", "Tiket gagal dibuat", "error");
           }
       }); 
-      
+      $(".kirim").prop('disabled', false);
       return false;
     }
 
