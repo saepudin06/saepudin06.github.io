@@ -51,7 +51,7 @@
 						<tr>
 						  <th scope="col" width="30%" class="align-middle">Tanggal</th>
 						  <th scope="col" width="30%" class="align-middle">No. Incoice</th>
-						  <th scope="col" width="30%" class="align-middle">Status</th>
+						  <th scope="col" width="30%" class="align-middle">Action</th>
 						</tr>
 					</thead>
 					<tbody id="tbodyTagihan">
@@ -65,6 +65,7 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
@@ -96,7 +97,7 @@
 	                htmls.push('<tr>\
 		                <td>' + value.tanggal + '</td>\
 		                <td>' + value.nomor + '</td>\
-		                <td>' + value.status + '</td>\
+		                <td><button type="button" class="btn btn-danger btn-sm" onclick="deleteData('+index+')"> Delete </button></td>\
 		            	</tr>');
 	            	
 	            }
@@ -107,6 +108,22 @@
 
 	        $('#tbodyTagihan').html(htmls);
 	    });
+
+	    function deleteData(id){
+	    	swal({
+			  title: "",
+			  text: "Apakah anda yakin?",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+			  	firebase.database().ref('transaksi/' + id).remove();
+			    swal("Transaksi", 'Data berhasil dihapus', "success"); 
+			  } 
+			});
+	    	return false;
+	    }
   </script>
 
 </body>
