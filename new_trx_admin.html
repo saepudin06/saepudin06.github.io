@@ -95,7 +95,7 @@
                   <div class="modal-footer">
                       <button type="button" class="btn btn-light" data-dismiss="modal">Tutup
                       </button>
-                      <button type="button" class="btn btn-danger" onclick="kirim('gagal')">Gagal
+                      <button type="button" class="btn btn-danger" onclick="deleteData()">Delete
                       </button>
                       <button type="button" class="btn btn-warning" onclick="kirim('sukses')">Sukses
                       </button>
@@ -186,6 +186,14 @@
     $( "#send-msg" ).on('click', function(){
       $( "#update-modal" ).modal('show');
     });
+
+    function deleteData(){
+    	var id = $( "#idd" ).val();
+    	firebase.database().ref('transaksi/' + id).remove();
+    	$( "#update-modal" ).modal('hide');
+                
+        swal("Transaksi", 'Data berhasil dihapus', "success"); 
+    }
 
     function kirim(status){
       var id = $( "#idd" ).val();
