@@ -227,7 +227,7 @@
       var pesan = "";
 
       if(jenis == "token"){       
-        pesan = user+"\nNo. invoice : "+nomor+"\nToken : "+token.match(/.{1,4}/g).toString().replaceAll(",","-");+"\nInfo : "+keterangan+"\n"+status.toUpperCase();
+        pesan = user+"\nNo. invoice : "+nomor+"\nToken : "+token.match(/.{1,4}/g).toString().replaceAll(",","-")+"\nInfo : "+keterangan+"\n"+status.toUpperCase();
       } else {
         pesan = user+"\nNo. invoice : "+nomor+"\n"+status.toUpperCase();
       }
