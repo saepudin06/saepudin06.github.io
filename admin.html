@@ -69,7 +69,7 @@
             <p class="lead mb-2"><button class="btn btn-outline-primary btn-block" onclick="goTopage('listpulsa_admin.html')">Pulsa</button></p>
             <p class="lead mb-2"><button class="btn btn-outline-danger btn-block" onclick="goTopage('listpaketdata_admin.html')">Paket Data</button></p>
             <p class="lead mb-2"><button class="btn btn-outline-dark btn-block" onclick="goTopage('listtoken_admin.html')">Token</button></p>
-            <p class="lead mb-2"><button class="btn btn-outline-warning btn-block" onclick="goTopage('topup_admin.html')">Topup</button></p>
+            <p class="lead mb-2"><button class="btn btn-outline-warning btn-block" onclick="goTopage('listtopup_admin.html')">Topup</button></p>
           </div>
         </div>
         
@@ -78,8 +78,9 @@
             <div class="features-icons-icon d-flex">
               <i class="icon-layers m-auto text-primary"></i>
             </div>
-            <h3>Daftar Tagihan</h3>
+            <h3>Daftar</h3>
             <p class="lead mb-2"><button class="btn btn-outline-primary btn-block" onclick="goTopage('tagihan_admin.html')">Tagihan</button></p>
+            <p class="lead mb-2"><button class="btn btn-outline-danger btn-block" onclick="pesan()">Pesan Diterima</button></p>
           </div>
         </div>
 
@@ -93,6 +94,14 @@
             </div>
             <h3>Pembelian</h3>
             <p class="lead mb-2">
+                <select class="form-control col-md-12" id="jenis" required>
+                  <option value="pulsa">Pulsa</option>
+                  <option value="paketdata">Paket Data</option>
+                  <option value="token">Token Listrik</option>
+                  <option value="topup">Topup</option>
+               </select>
+            </p>
+            <p class="lead mb-2">
                 <select class="form-control col-md-12" id="operator" required>
                         <option value="telkomsel">Telkomsel</option>
                         <option value="indosat">Indosat</option>
@@ -101,17 +110,13 @@
                         <option value="axis">Axis</option>
                         <option value="smartfren">Smartfren</option>
                         <option value="pln">PLN</option>
+                        <option value="dana">Dana</option>
+                        <option value="gopay">GoPay</option>
+                        <option value="shopeepay">ShopeePay</option>
                 </select>
-            </p>
+            </p>            
             <p class="lead mb-2">
-                <select class="form-control col-md-12" id="jenis" required>
-                  <option value="pulsa">Pulsa</option>
-                  <option value="paketdata">Paket Data</option>
-                  <option value="token">Token Listrik</option>
-               </select>
-            </p>
-            <p class="lead mb-2">
-              <button class="btn btn-outline-primary btn-block" onclick="goTrans()">Tagihan</button>
+              <button class="btn btn-outline-primary btn-block" onclick="goTrans()">Beli</button>
             </p>    
           </div>
         </div>
@@ -122,6 +127,7 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script type="text/javascript">
     function goTopage(param){
       window.location.href = param;
@@ -139,9 +145,35 @@
           window.location.href = "pulsa_admin.html?opt="+opt;
       }else if(type == "paketdata"){
           window.location.href = "paketdata_admin.html?opt="+opt;
+      }else if(type == "topup"){
+          window.location.href = "topup_admin.html?opt="+opt;
       }else{
           window.location.href = "token_admin.html";
       }
+    }
+
+    function pesan(){
+      var msg = "Pesanan anda sedang diproses\nHarap Menunggu sebentar";
+      
+      $.ajax({
+          url: 'https://api.telegram.org/bot1616490013:AAGYHtu0NjIcjNmIiCZY-qe21o50hZ5pM9M/sendMessage',
+          type: 'POST',
+          data: { chat_id: "-527747385", text : msg} ,
+          dataType: "json",
+          success: function (response) {
+              if(response.ok){
+                                
+                swal("Informasi", "Pesan Sudah Dikirim", "success");  
+                 
+              }else{
+                swal("Informasi", "Tiket gagal dibuat", "success");
+              }
+              
+          },
+          error: function () {
+              swal("Informasi", "Tiket gagal dibuat", "error");
+          }
+      });
     }
   </script>
 

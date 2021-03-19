@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SALMAN SHOP</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"> -->
+
+  <!-- Custom styles for this template -->
+  <link href="css/landing-page.min.css" rel="stylesheet">
+  <style type="text/css">
+  	.center {
+  		text-align: center;
+  	}
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <div class="navbar-brand text-white"><a href="admin.html"><i class="fa fa-arrow-left text-white"></i></a>&nbsp;&nbsp;SALMAN SHOP</div>
+      <!-- <a class="btn btn-outline-primary" href="javascript:;">Sign In</a> -->
+    </div>
+  </nav>
+
+  	<div class="container" style="padding-top: 70px; font-size: 12px !important;">
+		<!-- <h4 class="text-center">List Harga Token Listrik</h4><br> -->
+		<div class="row">
+			<div class="col-md-4">
+		        <button onclick="tambah()" class="btn btn-sm btn-danger btn-block">Tambah</button>
+		    </div>
+	    </div>
+	    <div style="padding-top: 10px;">
+
+		<div class="row">
+			<div class="col-md-4">
+				<table class="table table-bordered table-sm center">
+					<thead>
+						<tr class="thead-dark">
+							<th colspan="3">Topup Dana</th>
+						</tr>
+						<tr>
+						  <th scope="col" width="40%" class="align-middle">Nama</th>
+						  <th scope="col" width="20%" class="align-middle">Harga</th>
+						  <th scope="col" width="20%" class="align-middle">Edit</th>
+						</tr>
+					</thead>
+					<tbody id="tbodyDana">
+						
+					</tbody>
+				</table>
+			</div>
+
+			<div class="col-md-4">
+				<table class="table table-bordered table-sm center">
+					<thead>
+						<tr class="thead-dark">
+							<th colspan="3">Topup GoPay</th>
+						</tr>
+						<tr>
+						  <th scope="col" width="40%" class="align-middle">Nama</th>
+						  <th scope="col" width="20%" class="align-middle">Harga</th>
+						  <th scope="col" width="20%" class="align-middle">Edit</th>
+						</tr>
+					</thead>
+					<tbody id="tbodyGoPay">
+						
+					</tbody>
+				</table>
+			</div>
+
+			<div class="col-md-4">
+				<table class="table table-bordered table-sm center">
+					<thead>
+						<tr class="thead-dark">
+							<th colspan="3">Topup ShopeePay</th>
+						</tr>
+						<tr>
+						  <th scope="col" width="40%" class="align-middle">Nama</th>
+						  <th scope="col" width="20%" class="align-middle">Harga</th>
+						  <th scope="col" width="20%" class="align-middle">Edit</th>
+						</tr>
+					</thead>
+					<tbody id="tbodyShopeepay">
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<!-- Update Model -->
+	<form action="" method="POST" class="users-update-record-model form-horizontal">
+	<div id="update-modal" data-backdrop="static" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel"
+	   aria-hidden="true">
+	  <div class="modal-dialog modal-lg modal-dialog-centered">
+	      <div class="modal-content" style="overflow: hidden;">
+	          <div class="modal-header">
+	              <h4 class="modal-title" id="custom-width-modalLabel">Update Data</h4>
+	              <button type="button" class="close" data-dismiss="modal"
+	                      aria-hidden="true">×
+	              </button>
+	          </div>
+	          
+	          <div class="form-group col-md-12" style="padding-top: 20px;">
+	            <h6><label id="nama-lbl"></label></h6>
+	          </div>   
+
+	          <div class="form-group col-md-12">
+	            <input id="harga" type="number" class="form-control" name="harga" placeholder="harga" autocomplete="off" autofocus>
+	          </div> 
+	          
+	          <div class="form-group col-md-12">
+	              <input id="idd" type="hidden" class="form-control" name="idd">
+	              <input id="keterangan" type="hidden" class="form-control" name="keterangan">
+	              <input id="jenis" type="hidden" class="form-control" name="jenis">
+	              <input id="operator" type="hidden" class="form-control" name="operator">              
+	              <input id="jual" type="number" class="form-control" name="jual" placeholder="jual" autocomplete="off" autofocus>
+	          </div>
+
+	          <div class="modal-footer">
+	              <button type="button" class="btn btn-light" data-dismiss="modal">Tutup
+	              </button>
+	              <button type="button" class="btn btn-danger" onclick="hapus()">Delete
+	              </button>
+	              <button type="button" class="btn btn-primary" onclick="simpanEdit()">Simpan
+	              </button>
+	          </div>
+	      </div>
+	  </div>
+	</div>
+	</form>
+
+	<!-- Tambah Model -->
+	<form action="" method="POST" class="users-add-record-model form-horizontal">
+	<div id="add-modal" data-backdrop="static" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel"
+	   aria-hidden="true">
+	  <div class="modal-dialog modal-lg modal-dialog-centered">
+	      <div class="modal-content" style="overflow: hidden;">
+	          <div class="modal-header">
+	              <h4 class="modal-title" id="custom-width-modalLabel">Tambah Data</h4>
+	              <button type="button" class="close" data-dismiss="modal"
+	                      aria-hidden="true">×
+	              </button>
+	          </div>
+
+	          <div class="form-group col-md-12" style="padding-top: 20px;">
+	            <input id="idd-add" type="text" class="form-control" name="idd-add" placeholder="idd" autocomplete="off" readonly="">
+	          </div> 
+
+	          <div class="form-group col-md-12">
+	            <select class="form-control form-control-sm" id="operator-add" required autofocus >
+					    <option value="dana">Dana</option>
+					    <option value="gopay">GoPay</option>
+					    <option value="shopeepay">ShopeePay</option>
+					 </select>
+	          </div> 
+
+	          <div class="form-group col-md-12">
+	            <input id="keterangan-add" type="text" class="form-control" name="keterangan-add" placeholder="keterangan" autocomplete="off" autofocus>
+	          </div> 
+
+	          <div class="form-group col-md-12">
+	            <input id="harga-add" type="number" class="form-control" name="harga-add" placeholder="harga" autocomplete="off" autofocus>
+	          </div> 
+	          
+	          <div class="form-group col-md-12">
+	              <input id="jenis-add" type="hidden" class="form-control" name="jenis-add" value="token">	              
+	              <input id="jual-add" type="number" class="form-control" name="jual-add" placeholder="jual" autocomplete="off" autofocus>
+	          </div>
+
+	          <div class="modal-footer">
+	              <button type="button" class="btn btn-light" data-dismiss="modal">Tutup
+	              </button>
+	              <button type="button" class="btn btn-primary" onclick="simpanTambah()">Simpan
+	              </button>
+	          </div>
+	      </div>
+	  </div>
+	</div>
+	</form>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
+
+  <script type="text/javascript">
+  	// Your web app's Firebase configuration
+		var firebaseConfig = {
+		    apiKey: "AIzaSyCPSiurIE5DmdIuV2M2VX0IiLidUv5JGi8",
+		    authDomain: "salman-pulsa.firebaseapp.com",
+		    projectId: "salman-pulsa",
+		    storageBucket: "salman-pulsa.appspot.com",
+		    messagingSenderId: "931681268010",
+		    appId: "1:931681268010:web:e2798e9ba135ed56e42e53"
+		};
+	    // Initialize Firebase
+	  	firebase.initializeApp(firebaseConfig);
+
+	    var database = firebase.database();
+
+	    var lastIndex = 0;
+
+	    // Get Data
+	    firebase.database().ref('listharga').orderByChild("jenis").equalTo("topup").on('value', function (snapshot) {
+	        var value = snapshot.val();
+	        var htmlDana = [];
+	        var htmlGoPay = [];
+	        var htmlShopeepay = [];	        
+			
+
+	        $.each(value, function (index, value) {
+	            if (value) {
+	                if(value.operator == 'dana'){
+		                htmlDana.push('<tr>\
+		                <td>' + value.keterangan + '</td>\
+		                <td>' + value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</td>\
+		                <td><button class="btn btn-sm btn-warning" onclick="edit(\''+index+'\',\''+value.harga+'\',\''+value.jenis+'\',\''+value.jual+'\',\''+value.keterangan+'\',\''+value.operator+'\')">Edit</button></td>\
+		            	</tr>');
+	            	}
+
+	            	if(value.operator == 'gopay'){
+		                htmlGoPay.push('<tr>\
+		                <td>' + value.keterangan + '</td>\
+		                <td>' + value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</td>\
+		                <td><button class="btn btn-sm btn-warning" onclick="edit(\''+index+'\',\''+value.harga+'\',\''+value.jenis+'\',\''+value.jual+'\',\''+value.keterangan+'\',\''+value.operator+'\')">Edit</button></td>\
+		            	</tr>');
+	            	}
+
+	                if(value.operator == 'shopeepay'){
+		                htmlShopeepay.push('<tr>\
+		                <td>' + value.keterangan + '</td>\
+		                <td>' + value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</td>\
+		                <td><button class="btn btn-sm btn-warning" onclick="edit(\''+index+'\',\''+value.harga+'\',\''+value.jenis+'\',\''+value.jual+'\',\''+value.keterangan+'\',\''+value.operator+'\')">Edit</button></td>\
+		            	</tr>');
+	            	}
+	            }
+	            // lastIndex = index;
+	        });
+	        $('#tbodyDana').html(htmlDana);
+	        $('#tbodyGoPay').html(htmlGoPay);
+	        $('#tbodyShopeepay').html(htmlShopeepay);
+	    });
+
+	function edit(id, harga, jenis, jual, ket, opt){
+		$( "#idd" ).val(id);
+		$( "#harga" ).val(harga);
+		$( "#jenis" ).val(jenis);
+		$( "#jual" ).val(jual);
+		$( "#nama-lbl" ).text(ket);
+		$( "#keterangan" ).val(ket);
+		$( "#operator" ).val(opt);
+		$( "#update-modal" ).modal('show');
+	}
+
+	function tambah(){
+		firebase.database().ref('listharga').on('value', function (snapshot) {
+			var value = snapshot.val();
+	    	$.each(value, function (index, value) {
+	            if (value) {
+	            	lastIndex = index;
+	            }
+	        });
+	        $("#idd-add").val(lastIndex+1);
+	        $('#operator-add').val('dana');
+	        $('#jenis-add').val('topup');
+	        $('#harga-add').val('');
+	        $('#jual-add').val('');
+	        $('#keterangan-add').val('');
+	    });
+		$( "#add-modal" ).modal('show');	
+		
+	}
+
+	function simpanTambah(){
+		var ID = $("#idd-add").val();
+		var operator = $('#operator-add').val();
+        var jenis = $('#jenis-add').val();
+        var harga = $('#harga-add').val();
+        var jual = $('#jual-add').val();
+        var keterangan = $('#keterangan-add').val();
+
+		firebase.database().ref('listharga/' + ID).set({
+            operator: operator,
+            jenis: jenis,
+            harga: harga,
+            jual: jual,
+            keterangan: keterangan
+        });
+		$( "#add-modal" ).modal('hide');	
+        swal("Transaksi", 'Data berhasil disimpan', "success"); 
+	}
+
+	function simpanEdit(){
+		var ID = $("#idd").val();
+		var operator = $('#operator').val();
+        var jenis = $('#jenis').val();
+        var harga = $('#harga').val();
+        var jual = $('#jual').val();
+        var keterangan = $('#keterangan').val();
+
+        var postData = {
+            	operator: operator,
+	            jenis: jenis,
+	            harga: harga,
+	            jual: jual,
+	            keterangan: keterangan
+        };
+      
+      	var updates = {};
+
+        updates['/listharga/' + ID] = postData;
+        firebase.database().ref().update(updates);
+
+		$( "#update-modal" ).modal('hide');	
+        swal("Transaksi", 'Data berhasil diubah', "success"); 
+	}
+
+	function hapus(){
+		var ID = $("#idd").val();
+    	swal({
+		  title: "",
+		  text: "Apakah anda yakin?",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+		  	firebase.database().ref('listharga/' + ID).remove();
+		  	$( "#update-modal" ).modal('hide');	
+		    swal("Transaksi", 'Data berhasil dihapus', "success"); 
+		  } 
+		});
+    	// return false;
+	}
+  </script>
+
+</body>
+
+</html>
