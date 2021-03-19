@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SALMAN SHOP</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"> -->
+
+  <!-- Custom styles for this template -->
+  <link href="css/landing-page.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <div class="navbar-brand text-white"><a href="index.html"><i class="fa fa-arrow-left text-white"></i></a>&nbsp;&nbsp;SALMAN SHOP</div>
+      <!-- <a class="btn btn-outline-primary" href="javascript:;">Sign In</a> -->
+    </div>
+  </nav>
+
+  <!-- Masthead -->
+  <header class="bg-light" style="padding-top:55px">
+    <div class="container bg-warning">
+      <div class="row">
+        <div class="col-xl-12 text-center text-white mx-auto" style="padding: 10px;">
+          <h5><div class="lbl"></div></h5>
+        </div>
+    </div>
+  </div>
+  </header>
+
+  <!-- Icons Grid -->
+  <section class="features-icons bg-light" style="padding: 0px !important;">
+    <div class="container">
+      
+      <div class="list-harga"></div>      
+
+    </div>
+  </section>
+
+  <!-- Update Model -->
+  <form action="" method="POST" class="users-update-record-model form-horizontal">
+      <div id="update-modal" data-backdrop="static" data-keyboard="false" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel"
+           aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content" style="overflow: hidden;">
+                  <div class="modal-header">
+                      <h4 class="modal-title" id="custom-width-modalLabel">Transaksi</h4>
+                      <button type="button" class="close" data-dismiss="modal"
+                              aria-hidden="true">×
+                      </button>
+                  </div>
+                  
+                  <div class="form-group col-md-12" style="padding-top: 20px;">
+                    <label id="ket-lbl"></label><br>
+                    <label id="harga-lbl"></label>
+                  </div>   
+
+                  <div class="input-group col-md-12">
+                    <input id="hp" type="tel" class="form-control" name="hp" placeholder="Nomor Handphone" required autofocus autocomplete="off">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button" onclick="ok.performClick()"><i class="icon-book-open"></i></button>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-12">
+                      <input id="ket" type="hidden" class="form-control" name="ket" placeholder="Nama" required autofocus>
+                  </div>
+                  <div class="form-group col-md-12">
+                      <input id="harga" type="hidden" class="form-control" name="harga" placeholder="Harga" autofocus>
+                  </div>
+
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-light" data-dismiss="modal">Batal
+                      </button>
+                      <button type="button" class="btn btn-warning kirim" onclick="kirim()">Kirim
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </form>
+  <div style="padding-bottom:50px"></div>
+  <!-- Footer -->
+  <footer class="footer bg-light fixed-bottom" style="padding-top: 0px !important;padding-bottom: 0px !important;">
+    <div class="container">
+      <div class="row">
+        <button id="send-msg" class="btn btn-lg btn-dark btn-block col-lg-12" disabled>Pilih</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
+
+  <script type="text/javascript">
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyCPSiurIE5DmdIuV2M2VX0IiLidUv5JGi8",
+        authDomain: "salman-pulsa.firebaseapp.com",
+        projectId: "salman-pulsa",
+        storageBucket: "salman-pulsa.appspot.com",
+        messagingSenderId: "931681268010",
+        appId: "1:931681268010:web:e2798e9ba135ed56e42e53"
+    };
+      // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    var database = firebase.database();
+
+    var lastIndex = 0;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const operator = urlParams.get('opt')
+    if(operator == null) window.location.href = "index.html";
+    $('.lbl').text("Topup " + operator);
+    
+    // Get Data
+    firebase.database().ref('listharga').orderByChild("operator").equalTo(operator).on('value', function (snapshot) {
+        var value = snapshot.val();
+        var htmls = [];
+        $.each(value, function (index, value) {
+            if (value) {
+                // console.log(value);
+                if(value.jenis == 'topup'){
+                  htmls.push('<div class="row" style="padding: 5px;">'+
+                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+value.keterangan+'\',\''+value.harga+'\')"><h6>'+value.keterangan+'</h6> Harga : '+value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</button></div>');
+              }
+            }
+            lastIndex = index;
+        });
+
+        $('.list-harga').html(htmls);
+        
+    });   
+    
+    function send(ket, harga){
+      $( "#send-msg" ).prop( "disabled", false );
+      $( "#hp" ).val('');
+      $( "#ket" ).val(ket);
+      $( "#harga" ).val(harga);
+      $( "#ket-lbl" ).text(ket);
+      $( "#harga-lbl" ).text('Harga : ' + harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
+    }
+
+    $( "#send-msg" ).on('click', function(){
+      $( "#update-modal" ).modal('show');
+    });
+
+    function kirim(){
+      $(".kirim").prop('disabled', true);
+      var ket = $( "#ket" ).val();
+      var harga = $( "#harga" ).val();
+      var hp = $( "#hp" ).val();
+
+      if(hp == ""){
+        swal("Peringatan", "Nomor Handphone belum diisi..");
+        return false;
+      }
+
+      var date = new Date();
+      var dateStr =
+        ("00" + date.getDate()).slice(-2) + "/" +
+        ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
+        date.getFullYear() + " " +
+        ("00" + date.getHours()).slice(-2) + ":" +
+        ("00" + date.getMinutes()).slice(-2) + ":" +
+        ("00" + date.getSeconds()).slice(-2);
+
+      var ID =
+        ("00" + date.getDate()).slice(-2) + 
+        ("00" + (date.getMonth() + 1)).slice(-2) + 
+        date.getFullYear() + 
+        ("00" + date.getHours()).slice(-2) + 
+        ("00" + date.getMinutes()).slice(-2) + 
+        ("00" + date.getSeconds()).slice(-2); 
+
+      var invNo = "INV-" +ID + "." + hp;
+      
+      var pesan = localStorage.getItem("name")+"\nTanggal : "+dateStr+"\nPesanan :"+ket+"\nJenis Pesanan : pulsa \nHarga : "+harga+"\nKirim ke : "+hp+"\nNo. invoice : "+invNo;
+
+      $.ajax({
+          url: 'https://api.telegram.org/bot1616490013:AAGYHtu0NjIcjNmIiCZY-qe21o50hZ5pM9M/sendMessage',
+          type: 'POST',
+          data: { chat_id: "-527747385", text : pesan} ,
+          dataType: "json",
+          success: function (response) {
+              if(response.ok){                
+                $( "#update-modal" ).modal('hide');
+                firebase.database().ref('transaksi/' + ID).set({
+                    tanggal: dateStr,
+                    nomor: invNo,
+                    nama: ket,
+                    jenis: "pulsa",
+                    harga: harga,
+                    status: "inproses",
+                    keterangan: "",                    
+                    token: "",
+                    user: localStorage.getItem("name")                    
+                });
+                
+                swal("Transaksi", "No. invoice : "+invNo+' status akan diproses', "success");   
+                setTimeout(function(){
+                  window.location.href = "history.html";   
+                }, 1000);   
+              }else{
+                swal("Transaksi", "Tiket gagal dibuat", "success");
+              }
+              
+          },
+          error: function () {
+              swal("Transaksi", "Tiket gagal dibuat", "error");
+          }
+      }); 
+      $(".kirim").prop('disabled', false);
+      return false;
+    }
+
+    function addNumber(number){
+      $('#hp').val(number.toString());
+    }
+  </script>
+
+</body>
+
+</html>

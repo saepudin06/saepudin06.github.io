@@ -107,9 +107,10 @@
       	<div class="col-lg-12 bg-light">
           <table class="table table-bordered">
           	<tr>
-          		<td class="align-middle pulsa bg-primary text-white" width="33%" onclick="pilihKategori('pulsa')"><i class="icon-screen-smartphone m-auto"></i> <br> pulsa</td>
-          		<td class="align-middle paketdata" width="33%" onclick="pilihKategori('paketdata')"><i class="icon-feed m-auto"></i> <br> paket data</td>
-          		<td class="align-middle pln" width="33%" onclick="pilihKategori('pln')"><i class="icon-energy m-auto"></i> <br> pln</td>
+          		<td class="align-middle pulsa bg-primary text-white" width="25%" onclick="pilihKategori('pulsa')"><i class="icon-screen-smartphone m-auto"></i> <br> pulsa</td>
+          		<td class="align-middle paketdata" width="25%" onclick="pilihKategori('paketdata')"><i class="icon-feed m-auto"></i> <br> paket data</td>
+          		<td class="align-middle pln" width="25%" onclick="pilihKategori('pln')"><i class="icon-energy m-auto"></i> <br> pln</td>
+              <td class="align-middle topup-list" width="25%" onclick="pilihKategori('topup-list')"><i class="icon-list m-auto"></i> <br> topup</td>
           	</tr>
           </table>
         </div>
@@ -133,6 +134,12 @@
           	<tr class="listrik" style="display: none;">
           		<td class="align-middle" width="33%" onclick="pilihOperator('token')"><img src="logo/token.png" width="50" height="55" class="m-auto"> <br> Token Listrik</td>
           	</tr>
+
+            <tr class="topup" style="display: none;">
+              <td class="align-middle" width="33%" onclick="pilihOperator('dana')"><img src="logo/dana.png" width="100" height="30" class="m-auto"> <br> Dana</td>
+              <td class="align-middle" width="33%" onclick="pilihOperator('gopay')"><img src="logo/gopay.png" width="100" height="40" class="m-auto"> <br> GoPay</td>
+              <td class="align-middle" width="33%" onclick="pilihOperator('shopeepay')"><img src="logo/shopeepay.png" width="80" height="40" class="m-auto"> <br> ShoopePay</td>
+            </tr>
           </table>
         </div>
 
@@ -270,23 +277,33 @@
     	$('.pulsa').removeClass('bg-primary text-white');
     	$('.paketdata').removeClass('bg-primary text-white');
     	$('.pln').removeClass('bg-primary text-white');
+      $('.topup-list').removeClass('bg-primary text-white');
 
 
     	if(kategory == "pulsa"){
     		$('.pulsa').addClass('bg-primary text-white');
     		$('#kat').val('pulsa.html');
     		$('.listrik').hide();
+        $('.topup').hide();
     		$('.operator').show();
     	}else if(kategory == "paketdata"){
     		$('.paketdata').addClass('bg-primary text-white');
     		$('#kat').val('paketdata.html');
     		$('.listrik').hide();
+        $('.topup').hide();
     		$('.operator').show();
-    	}else{
+    	}else if(kategory == "topup-list"){
+        $('.topup-list').addClass('bg-primary text-white');
+        $('#kat').val('topup.html');
+        $('.listrik').hide();
+        $('.operator').hide();
+        $('.topup').show();
+      }else{
     		$('.pln').addClass('bg-primary text-white');
     		$('#kat').val('token.html');
     		$('.listrik').show();
     		$('.operator').hide();
+        $('.topup').hide();
     	}
     }
 
