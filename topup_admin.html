@@ -197,7 +197,7 @@
 
       var invNo = "INV-" +ID + "." + hp;
       
-      var pesan = "Tanggal : "+dateStr+"\nPesanan :"+ket+"\nJenis Pesanan : pulsa \nHarga : "+harga+"\nKirim ke : "+hp+"\nNo. invoice : "+invNo;
+      var pesan = "Tanggal : "+dateStr+"\nPesanan :"+ket+"\nJenis Pesanan : topup \nHarga : "+harga+"\nKirim ke : "+hp+"\nNo. invoice : "+invNo;
 
       $.ajax({
           url: 'https://api.telegram.org/bot1616490013:AAGYHtu0NjIcjNmIiCZY-qe21o50hZ5pM9M/sendMessage',
@@ -207,11 +207,11 @@
           success: function (response) {
               if(response.ok){                
                 $( "#update-modal" ).modal('hide');
-                firebase.database().ref('transaksi/' + ID).set({
+                firebase.database().ref('transaksiadmin/' + ID).set({
                     tanggal: dateStr,
                     nomor: invNo,
                     nama: ket,
-                    jenis: "pulsa",
+                    jenis: "topup",
                     harga: harga,
                     status: "success",
                     keterangan: "",                    
