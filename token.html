@@ -141,8 +141,13 @@
         $.each(value, function (index, value) {
             if (value) {
                 if(value.jenis == 'token'){
-                  htmls.push('<div class="row" style="padding: 5px;">'+
-                                   '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+value.keterangan+'\',\''+value.harga+'\')"><h6>'+value.keterangan+'</h6> Harga : '+value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</button></div>');
+                  if(value.harga == 0){
+                    htmls.push('<div class="row" style="padding: 5px;">'+
+                                     '<button class="btn btn-danger btn-block col-lg-12" style="text-align: left !important; font-size: 12px;"><h6>'+value.keterangan+'</h6> Close</button></div>');
+                  }else{
+                    htmls.push('<div class="row" style="padding: 5px;">'+
+                                     '<button class="btn btn-outline-primary btn-block col-lg-12" style="text-align: left !important; font-size: 12px;" onclick="send(\''+value.keterangan+'\',\''+value.harga+'\')"><h6>'+value.keterangan+'</h6> Harga : '+value.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</button></div>');
+                  }
               }
             }
             lastIndex = index;
