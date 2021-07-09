@@ -72,7 +72,7 @@
                   </div>
                   
                   <div class="input-group col-md-12">
-                    <input id="hp" type="tel" class="form-control" name="hp" placeholder="Nomor Handphone" required autofocus autocomplete="off">
+                    <input id="hp" type="tel" class="form-control" name="hp" placeholder="Nomor Handphone" required autofocus autocomplete="off" onkeypress="return onlyNumberKey(event)">
                     <div class="input-group-append">
                       <button class="btn btn-primary" type="button" onclick="ok.performClick()"><i class="icon-book-open"></i></button>
                     </div>
@@ -244,6 +244,24 @@
 
     function addNumber(number){
       $('#hp').val(number.toString());
+    }
+
+    $('#hp').on('paste', function() {
+      setTimeout(function() {
+        var str = $('#hp').val().replace("+62", "0").replaceAll(" ", "").replaceAll("-", "").replace(/[^0-9.]/g, '');
+        console.log(str);
+        $('#hp').val(str);
+      }, 100);
+    });
+
+
+    function onlyNumberKey(evt) {
+         
+        // Only ASCII character in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
     }
   </script>
 
